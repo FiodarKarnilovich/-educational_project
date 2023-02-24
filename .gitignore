@@ -1,1 +1,6 @@
 .idea
+web/target
+database/target
+model/target
+services/target
+
