@@ -12,7 +12,7 @@
                             <div class="card-body p-md-5 mx-md-4">
 
 
-                                <form name='f' action="/web/jsp/index.jsp" method='POST'>
+                                <form name='f' action="/web/jsp/index_logged.jsp" method='POST'>
                                     <p>Войдите в аккаунт</p>
 
                                     <div class="form-outline mb-4">
