@@ -1,24 +1,15 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<html>
+<%--<jsp:directive.page contentType="text/html; charset=UTF-8" />--%>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
-    <title>index</title>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<%--https://www.teahub.io/photos/full/19-198007_audi-r8-black-red.jpg--%>
-<%--${pageContext.request.contextPath}/img/home-img.jpg--%>
-
-<body style="background-image: url(https://www.teahub.io/photos/full/19-198007_audi-r8-black-red.jpg);
-      height: 100vh;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;">
-
+<body>
 <header>
     <ul class="nav justify-content-end">
         <li class="nav-item">
@@ -30,11 +21,6 @@
         <li class="nav-item">
             <a class="nav-link" href="/web/jsp/showlistcars.jsp">Rental Cars</a>
         </li>
-        <li class="nav-item">
-                <a class="nav-link" href="/web/jsp/login.jsp">Login</a>
-        </li>
-
+            <a class="nav-link" href="/web/jsp/login.jsp">Login</a>
     </ul>
 </header>
-
-<jsp:include page="_footer.jsp"/>
