@@ -19,14 +19,17 @@ public class LoginServlet extends HttpServlet {
         final String password=req.getParameter("password");
 
         PrintWriter writer = resp.getWriter();
+        HttpSession session = req.getSession();
 
         if (email.isEmpty() || password.isEmpty()) {
             writer.println("Please, Enter login and password");
+            session.setAttribute(email, "not logged");
         } else {
             writer.println("All right");
+            session.setAttribute(email, email);
         }
 
-        HttpSession session = req.getSession();
+
         //session.invalidate();
         session.setMaxInactiveInterval(24*60*60);
 
