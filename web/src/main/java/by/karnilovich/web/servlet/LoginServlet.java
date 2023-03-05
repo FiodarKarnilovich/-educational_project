@@ -15,6 +15,8 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import static by.karnilovich.web.servlet.AuthFilter.LOGIN_JSP;
+
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
 
@@ -36,6 +38,7 @@ public class LoginServlet extends HttpServlet {
         if (StringUtils.isAnyBlank(email, password)) {
             writer.println("Please, Enter login and password");
            // session.setAttribute(email, "logout");
+            resp.sendRedirect(LOGIN_JSP);
         } else {
             Person person = PersonUtil.getPersonList().stream()
                     .filter(p -> p.getEmail().equalsIgnoreCase(email))
@@ -45,7 +48,6 @@ public class LoginServlet extends HttpServlet {
                 writer.println("Invalid credentials. Please, Enter login and password again.");
             } else {
                 LOGGER.info("User '{}' logged in into app", person.getEmail());
-                writer.println("All right");
                 //TODO forward to main page
                 session.setAttribute(LOGGED_IN_USER, person);
                 resp.sendRedirect("/web/jsp/index_logged.jsp");

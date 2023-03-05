@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
+import static by.karnilovich.web.servlet.AuthFilter.INDEX_JSP;
 import static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER;
 
 @WebServlet(name = "LogOutServlet", urlPatterns = "/logout")
@@ -25,6 +26,6 @@ public class LogOutServlet extends HttpServlet {
         LOGGER.info("User logout");
         session.invalidate();
         LOGGER.info("session closed");
-        resp.sendRedirect("/web/jsp/index.jsp");
+        resp.sendRedirect(INDEX_JSP);
     }
 }

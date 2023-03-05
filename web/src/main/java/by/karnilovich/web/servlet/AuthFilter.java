@@ -10,10 +10,21 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
+import static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER;
+
 @WebFilter(urlPatterns = "/*")
 public class AuthFilter implements Filter {
 
     private static final Logger LOGGER = LogManager.getLogger(AuthFilter.class);
+    public static final String INDEX_JSP = "/web/jsp/index.jsp";
+    public static final String CONTACTS_JSP = "/web/jsp/contacts.jsp";
+    public static final String SHOW_LIST_CARS_JSP = "/web/jsp/show_list_cars.jsp";
+    public static final String LOGIN_JSP = "/web/jsp/login.jsp";
+    public static final String USER_REGISTRATION_JSP = "/web/jsp/user_registration.jsp";
+    public static final String WEB_LOGIN = "/web/login";
+    public static final String WEB_LOGOUT = "/web/logout";
+    public static final String WEB_USER_REGISTRATION = "/web/userregistration";
+
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -25,30 +36,26 @@ public class AuthFilter implements Filter {
             String requestURI = req.getRequestURI();
 
 
-            if (requestURI.equals("/web/jsp/index.jsp") || requestURI.equals("/web/jsp/contacts.jsp") ||
-                    requestURI.equals("/web/jsp/show_list_cars.jsp") || requestURI.equals("/web/jsp/login.jsp") ||
-                    requestURI.equals("/web/jsp/user_registration.jsp") || requestURI.equals("/web/login") || requestURI.equals("/web/userregistration")  ) {
-                LOGGER.debug(" 1 if -  "+requestURI);
+            if (requestURI.equals(INDEX_JSP) ||
+                    requestURI.equals(CONTACTS_JSP) ||
+                    requestURI.equals(SHOW_LIST_CARS_JSP) ||
+                    requestURI.equals(LOGIN_JSP) ||
+                    requestURI.equals(USER_REGISTRATION_JSP) ||
+                    requestURI.equals(WEB_LOGIN) ||
+                    requestURI.equals(WEB_USER_REGISTRATION)) {
+                LOGGER.debug(" registration no required-  " + requestURI);
                 filterChain.doFilter(servletRequest, servletResponse);
-            } else if ((requestURI.equals("/web/jsp/index_logged.jsp") || requestURI.equals("/web/jsp/view_user_details.jsp")) ||
-                        ((session != null) && (session.getAttribute("LOGGED_IN_USER") != null))) {
-                LOGGER.debug(" 2 if "+requestURI);
+            } else if (requestURI.equals(WEB_LOGOUT)) {
+                LOGGER.debug(" if (for logout) " + requestURI);
+                session.invalidate();
+                res.sendRedirect(INDEX_JSP);
+            } else if ((session != null) && (session.getAttribute(LOGGED_IN_USER) != null)) {
+                LOGGER.debug(" registration with login " + requestURI);
                 filterChain.doFilter(servletRequest, servletResponse);
-                } else if (requestURI.equals("/web/logout")) {
-                       LOGGER.debug(" 3 if "+requestURI);
-                       session.invalidate();
-                       res.sendRedirect("/web/jsp/index.jsp");
-                } else {
-                    LOGGER.debug("4 else "+requestURI);
-                    res.sendRedirect("/web/jsp/login.jsp");
-                }
-                // оперделить урлы которые нужно сразу проходить без аутентификации
-                // --> пропускать дальше
-                // иначе проверяем есть ли параметр в сессии (не NULL)
-                // есть --> пропускать дальше
-                // NULL --> редирекд на логин с сообщением "нет сессии" или еще что-то"
-//            ((HttpServletResponse) servletResponse).sendRedirect("/web/login.jsp");
-//            filterChain.doFilter(servletRequest, servletResponse);
+            } else {
+                LOGGER.debug("Not authorisation. Redirect to login page " + requestURI);
+                res.sendRedirect(LOGIN_JSP);
+            }
         }
     }
 }
