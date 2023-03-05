@@ -27,11 +27,10 @@ public class AuthFilter implements Filter {
 
             if (requestURI.equals("/web/jsp/index.jsp") || requestURI.equals("/web/jsp/contacts.jsp") ||
                     requestURI.equals("/web/jsp/show_list_cars.jsp") || requestURI.equals("/web/jsp/login.jsp") ||
-                    requestURI.equals("/web/jsp/user_registration.jsp")  ) {
+                    requestURI.equals("/web/jsp/user_registration.jsp") || requestURI.equals("/web/login") || requestURI.equals("/web/userregistration")  ) {
                 LOGGER.debug(" 1 if -  "+requestURI);
                 filterChain.doFilter(servletRequest, servletResponse);
-            } else if ((requestURI.equals("/web/jsp/index_logged.jsp") || requestURI.equals("/web/jsp/view_user_details.jsp")
-                    || requestURI.equals("/web/login") || requestURI.equals("/web/userregistration") ) ||
+            } else if ((requestURI.equals("/web/jsp/index_logged.jsp") || requestURI.equals("/web/jsp/view_user_details.jsp")) ||
                         ((session != null) && (session.getAttribute("LOGGED_IN_USER") != null))) {
                 LOGGER.debug(" 2 if "+requestURI);
                 filterChain.doFilter(servletRequest, servletResponse);
@@ -39,11 +38,9 @@ public class AuthFilter implements Filter {
                        LOGGER.debug(" 3 if "+requestURI);
                        session.invalidate();
                        res.sendRedirect("/web/jsp/index.jsp");
-                       filterChain.doFilter(servletRequest, servletResponse);
                 } else {
                     LOGGER.debug("4 else "+requestURI);
                     res.sendRedirect("/web/jsp/login.jsp");
-                    filterChain.doFilter(servletRequest, servletResponse);
                 }
                 // оперделить урлы которые нужно сразу проходить без аутентификации
                 // --> пропускать дальше
