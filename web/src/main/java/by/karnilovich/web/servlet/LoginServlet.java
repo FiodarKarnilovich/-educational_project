@@ -1,7 +1,7 @@
 package by.karnilovich.web.servlet;
 
 import by.karnilovich.web.util.PersonUtil;
-import by.kornilovich.model.Person;
+import by.karnilovich.model.Person;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -48,6 +48,7 @@ public class LoginServlet extends HttpServlet {
                 writer.println("All right");
                 //TODO forward to main page
                 session.setAttribute(LOGGED_IN_USER, person);
+                resp.sendRedirect("/web/jsp/index_logged.jsp");
             }
         }
 

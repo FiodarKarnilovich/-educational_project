@@ -1,22 +1,30 @@
 package by.karnilovich.web.servlet;
 
 import by.karnilovich.web.util.PersonUtil;
-import by.kornilovich.model.Person;
+import by.karnilovich.model.Person;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
+import static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER;
 
 
 @WebServlet(name = "UserRegistrationServlet", urlPatterns = "/userregistration")
 public class UserRegistrationServlet extends HttpServlet {
 
+    private static final Logger LOGGER = LogManager.getLogger(UserRegistrationServlet.class);
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        HttpSession session = req.getSession();
 
         final String firstName = req.getParameter("firstName");
         final String lastName = req.getParameter("lastName");
@@ -27,8 +35,10 @@ public class UserRegistrationServlet extends HttpServlet {
 
         Person person = new Person(firstName, lastName, email, password, birthDay, phoneNumber);
         PersonUtil.addPersonToList(person);
-        PrintWriter writer = resp.getWriter();
-        writer.println("All right");
+
+        LOGGER.info("User '{}' added in app", person.getEmail());
+        session.setAttribute(LOGGED_IN_USER, person);
+        resp.sendRedirect("/web/jsp/index_logged.jsp");
 
     }
 }

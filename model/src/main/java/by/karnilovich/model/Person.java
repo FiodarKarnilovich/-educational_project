@@ -1,4 +1,4 @@
-package by.kornilovich.model;
+package by.karnilovich.model;
 
 public class Person {
 

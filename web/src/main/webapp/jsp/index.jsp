@@ -28,7 +28,7 @@
             <a class="nav-link" href="/web/jsp/contacts.jsp">Contacts</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/web/jsp/showlistcars.jsp">Rental Cars</a>
+            <a class="nav-link" href="/web/jsp/show_list_cars.jsp">Rental Cars</a>
         </li>
         <li class="nav-item">
                 <a class="nav-link" href="/web/jsp/login.jsp">Login</a>

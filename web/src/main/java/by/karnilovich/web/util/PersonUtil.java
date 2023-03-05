@@ -1,6 +1,6 @@
 package by.karnilovich.web.util;
 
-import by.kornilovich.model.Person;
+import by.karnilovich.model.Person;
 
 import java.util.ArrayList;
 import java.util.List;
