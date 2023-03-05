@@ -31,13 +31,19 @@ public class AuthFilter implements Filter {
                 LOGGER.debug(" 1 if -  "+requestURI);
                 filterChain.doFilter(servletRequest, servletResponse);
             } else if ((requestURI.equals("/web/jsp/index_logged.jsp") || requestURI.equals("/web/jsp/view_user_details.jsp")
-                    || requestURI.equals("/web/login") || requestURI.equals("/web/userregistration")) ||
+                    || requestURI.equals("/web/login") || requestURI.equals("/web/userregistration") ) ||
                         ((session != null) && (session.getAttribute("LOGGED_IN_USER") != null))) {
                 LOGGER.debug(" 2 if "+requestURI);
                 filterChain.doFilter(servletRequest, servletResponse);
+                } else if (requestURI.equals("/web/logout")) {
+                       LOGGER.debug(" 3 if "+requestURI);
+                       session.invalidate();
+                       res.sendRedirect("/web/jsp/index.jsp");
+                       filterChain.doFilter(servletRequest, servletResponse);
                 } else {
-                    LOGGER.debug("3 else "+requestURI);
+                    LOGGER.debug("4 else "+requestURI);
                     res.sendRedirect("/web/jsp/login.jsp");
+                    filterChain.doFilter(servletRequest, servletResponse);
                 }
                 // оперделить урлы которые нужно сразу проходить без аутентификации
                 // --> пропускать дальше
