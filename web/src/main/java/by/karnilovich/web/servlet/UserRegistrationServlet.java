@@ -38,7 +38,7 @@ public class UserRegistrationServlet extends HttpServlet {
 
         LOGGER.info("User '{}' added in app", person.getEmail());
         session.setAttribute(LOGGED_IN_USER, person);
-        resp.sendRedirect("/web/jsp/index_logged.jsp");
+        resp.sendRedirect("/web/jsp/login.jsp");
 
     }
 }
