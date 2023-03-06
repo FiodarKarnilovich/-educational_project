@@ -18,6 +18,7 @@ import static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER;
 public class AuthFilter implements Filter {
 
     private static final Logger LOGGER = LogManager.getLogger(AuthFilter.class);
+    public static final String INDEX_MAIN = "/";
     public static final String INDEX_JSP = "/jsp/index.jsp";
     public static final String CONTACTS_JSP = "/jsp/contacts.jsp";
     public static final String SHOW_LIST_CARS_JSP = "/jsp/show_list_cars.jsp";
@@ -28,14 +29,14 @@ public class AuthFilter implements Filter {
     public static final String WEB_USER_REGISTRATION = "/userregistration";
 
     public static final List<String> NO_AUTH_URLS  = List.of(
-            INDEX_JSP, CONTACTS_JSP, SHOW_LIST_CARS_JSP, LOGIN_JSP, USER_REGISTRATION_JSP, WEB_LOGIN, WEB_USER_REGISTRATION); //todo
+            INDEX_MAIN, INDEX_JSP, CONTACTS_JSP, SHOW_LIST_CARS_JSP, LOGIN_JSP, USER_REGISTRATION_JSP, WEB_LOGIN, WEB_USER_REGISTRATION); //todo
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        if (true) {
-            filterChain.doFilter(servletRequest, servletResponse);
-            return;
-        }
+//        if (true) {
+//            filterChain.doFilter(servletRequest, servletResponse);
+//            return;
+//        }
         LOGGER.debug("--- auth filter  ---");
         {
             HttpServletRequest req = (HttpServletRequest) servletRequest;

@@ -11,9 +11,6 @@
     <title>index</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<%--https://www.teahub.io/photos/full/19-198007_audi-r8-black-red.jpg--%>
-<%--${pageContext.request.contextPath}/img/home-img.jpg--%>
-<%--http://localhost:8080/web/img/home-img.jpg--%>
 
 <body style="background-image: url(<%= request.getContextPath() %>/img/home-img.jpg);
         height: 100vh;
