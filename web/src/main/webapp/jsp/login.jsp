@@ -1,4 +1,10 @@
-
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+<%@ page import="jakarta.servlet.http.HttpServletRequest" %>
+<%@ page import="jakarta.servlet.ServletRequest" %>
+<%@ page import="jakarta.servlet.ServletResponse" %>
+<%@ page import="static by.karnilovich.web.servlet.AuthFilter.NOT_AUTHENTICATED" %>
+<%@ page import="static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util.println" %>
+<%@ page import="java.io.PrintWriter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/jsp/_header.jsp"/>
 
@@ -10,9 +16,17 @@
                     <div class="row g-0">
                         <div class="col-lg-6">
                             <div class="card-body p-md-5 mx-md-4">
-
-
                                 <form name='f' action="<%= request.getContextPath() %>/login" method="post">
+<%--                                    <p><%--%>
+<%--                                        if ((request.getSession().getAttribute(NOT_AUTHENTICATED)) != null) {--%>
+<%--                                            response.getWriter().println("Данная страница для авторизованных пользователей. /n" +--%>
+<%--                                                    "Войдите в аккаунт");--%>
+<%--                                        } else {--%>
+<%--                                            response.getWriter().println("Войдите в аккаунт");--%>
+<%--                                        }--%>
+<%--                                        request.getSession().removeAttribute(NOT_AUTHENTICATED);--%>
+<%--                                    %></p>--%>
+
                                     <p>Войдите в аккаунт</p>
 
                                     <div class="form-outline mb-4">

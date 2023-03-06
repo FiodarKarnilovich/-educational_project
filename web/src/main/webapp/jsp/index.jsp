@@ -18,13 +18,6 @@
         background-repeat: no-repeat;
         background-position: center center;">
 
-
-<%--<body style="background-image: url(https://www.teahub.io/photos/full/19-198007_audi-r8-black-red.jpg);--%>
-<%--      height: 100vh;--%>
-<%--      background-size: cover;--%>
-<%--      background-repeat: no-repeat;--%>
-<%--      background-position: center center;">--%>
-
 <header>
     <ul class="nav justify-content-end">
         <li class="nav-item">
