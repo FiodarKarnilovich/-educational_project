@@ -8,6 +8,7 @@ public class Person {
     private String password;
     private String birthDay;
     private String phoneNumber;
+    private String role;
 
     public Person() {
     }
@@ -17,13 +18,15 @@ public class Person {
         this.password = password;
     }
 
-    public Person(String firstName, String lastName, String email, String password, String birthDay, String phoneNumber) {
+
+    public Person(String firstName, String lastName, String email, String password, String birthDay, String phoneNumber, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.birthDay = birthDay;
         this.phoneNumber = phoneNumber;
+        this.role = role;
     }
 
     public String getFirstName() {
@@ -74,6 +77,14 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -83,6 +94,7 @@ public class Person {
                 ", password='" + password + '\'' +
                 ", birthDay='" + birthDay + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

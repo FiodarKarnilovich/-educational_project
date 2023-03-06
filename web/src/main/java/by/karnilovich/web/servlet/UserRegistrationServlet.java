@@ -25,8 +25,6 @@ public class UserRegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession();
-
         final String firstName = req.getParameter("firstName");
         final String lastName = req.getParameter("lastName");
         final String email = req.getParameter("email");
@@ -34,11 +32,10 @@ public class UserRegistrationServlet extends HttpServlet {
         final String birthDay = req.getParameter("birthDay");
         final String phoneNumber = req.getParameter("phoneNumber");
 
-        Person person = new Person(firstName, lastName, email, password, birthDay, phoneNumber);
+        Person person = new Person(firstName, lastName, email, password, birthDay, phoneNumber, "user");
         PersonUtil.addPersonToList(person);
 
         LOGGER.info("User '{}' added in app", person.getEmail());
-      //  session.setAttribute(LOGGED_IN_USER, person);
         resp.sendRedirect(LOGIN_JSP);
 
     }

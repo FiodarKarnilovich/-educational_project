@@ -1,6 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="_header.jsp"/>
+<jsp:include page="/jsp/_header.jsp"/>
 
 <section class="h-100 gradient-form" style="background-color: #eee;">
     <div class="container py-5 h-100">
@@ -12,7 +12,7 @@
                             <div class="card-body p-md-5 mx-md-4">
 
 
-                                <form name='f' action="/web/login" method="post">
+                                <form name='f' action="<%= request.getContextPath() %>/login" method="post">
                                     <p>Войдите в аккаунт</p>
 
                                     <div class="form-outline mb-4">
@@ -35,7 +35,7 @@
                                     <p class="mb-0 me-2">Нет аккаунта?</p>
                                 </div>
 
-                                <a href="/web/jsp/user_registration.jsp">
+                                <a href="<%= request.getContextPath() %>/jsp/user_registration.jsp">
                                     <button class="btn btn-outline-danger">Регистрация</button>
                                 </a>
 
@@ -47,4 +47,4 @@
         </div>
     </div>
 </section>
-<jsp:include page="_footer.jsp"/>
+<jsp:include page="/jsp/_footer.jsp"/>

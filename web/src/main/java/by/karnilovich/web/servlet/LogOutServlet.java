@@ -21,11 +21,12 @@ public class LogOutServlet extends HttpServlet {
 
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         LOGGER.info("User logout");
         session.invalidate();
         LOGGER.info("session closed");
-        resp.sendRedirect(INDEX_JSP);
+        resp.sendRedirect(req.getContextPath() + INDEX_JSP);
+//        req.getRequestDispatcher("").forward(req, resp);
     }
 }

@@ -13,7 +13,7 @@
 <%--https://www.teahub.io/photos/full/19-198007_audi-r8-black-red.jpg--%>
 <%--${pageContext.request.contextPath}/img/home-img.jpg--%>
 
-<body style="background-image: url(https://www.teahub.io/photos/full/19-198007_audi-r8-black-red.jpg);
+<body style="background-image: url(<%= request.getContextPath() %>/img/home-img.jpg);
       height: 100vh;
       background-size: cover;
       background-repeat: no-repeat;
@@ -22,20 +22,20 @@
 <header>
     <ul class="nav justify-content-end">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/web/jsp/index_logged.jsp">Home</a>
+            <a class="nav-link active" aria-current="page" href="<%= request.getContextPath() %>/jsp/index_logged.jsp">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/web/jsp/contacts.jsp">Contacts</a>
+            <a class="nav-link" href="<%= request.getContextPath() %>/jsp/contacts.jsp">Contacts</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/web/jsp/view_user_details.jsp">Profile</a>
+            <a class="nav-link" href="<%= request.getContextPath() %>/jsp/view_user_details.jsp">Profile</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/web/logout">Logout</a>
+            <a class="nav-link" href="<%= request.getContextPath() %>/logout">Logout</a>
         </li>
 
     </ul>
 </header>
 
-<jsp:include page="_footer.jsp"/>
+<jsp:include page="/jsp/_footer.jsp"/>
 
