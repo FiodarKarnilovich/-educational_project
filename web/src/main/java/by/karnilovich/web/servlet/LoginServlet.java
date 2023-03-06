@@ -38,7 +38,6 @@ public class LoginServlet extends HttpServlet {
 
         if (StringUtils.isAnyBlank(email, password)) {
             writer.println("Please, Enter login and password");
-           // session.setAttribute(email, "logout");
             resp.sendRedirect(LOGIN_JSP);
         } else {
             Person person = PersonUtil.getPersonList().stream()
@@ -55,8 +54,6 @@ public class LoginServlet extends HttpServlet {
             }
         }
 
-
-        //session.invalidate();
         session.setMaxInactiveInterval(24 * 60 * 60);
 
     }

@@ -31,12 +31,15 @@ public class AuthFilter implements Filter {
     public static final List<String> NO_AUTH_URLS  = List.of(
             INDEX_MAIN, INDEX_JSP, CONTACTS_JSP, SHOW_LIST_CARS_JSP, LOGIN_JSP, USER_REGISTRATION_JSP, WEB_LOGIN, WEB_USER_REGISTRATION); //todo
 
+    public static final String NOT_AUTHENTICATED = "User is not authenticated";
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 //        if (true) {
 //            filterChain.doFilter(servletRequest, servletResponse);
 //            return;
 //        }
+
         LOGGER.debug("--- auth filter  ---");
         {
             HttpServletRequest req = (HttpServletRequest) servletRequest;
@@ -55,7 +58,7 @@ public class AuthFilter implements Filter {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 LOGGER.debug("User is not authenticated. Redirect to login page " + requestURI);
-                req.setAttribute(",", "");
+                req.setAttribute(NOT_AUTHENTICATED,"User is not authenticated" );
                 req.getRequestDispatcher(LOGIN_JSP)
                         .forward(servletRequest, servletResponse);
             }
