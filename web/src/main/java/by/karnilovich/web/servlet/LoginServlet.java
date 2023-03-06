@@ -16,8 +16,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import static by.karnilovich.web.servlet.AuthFilter.LOGIN_JSP;
+import static by.karnilovich.web.servlet.AuthFilter.WEB_LOGIN;
 
-@WebServlet(name = "LoginServlet", urlPatterns = "/login")
+@WebServlet(name = "LoginServlet", urlPatterns = WEB_LOGIN)
 public class LoginServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(LoginServlet.class);

@@ -11,13 +11,12 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-import static by.karnilovich.web.servlet.AuthFilter.INDEX_JSP;
-import static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER;
+import static by.karnilovich.web.servlet.AuthFilter.*;
 
-@WebServlet(name = "LogOutServlet", urlPatterns = "/logout")
+@WebServlet(name = "LogOutServlet", urlPatterns = WEB_LOGOUT)
 public class LogOutServlet extends HttpServlet {
 
-    private static final Logger LOGGER = LogManager.getLogger(UserRegistrationServlet.class);
+    private static final Logger LOGGER = LogManager.getLogger(LogOutServlet.class);
 
 
     @Override
@@ -26,7 +25,7 @@ public class LogOutServlet extends HttpServlet {
         LOGGER.info("User logout");
         session.invalidate();
         LOGGER.info("session closed");
-        resp.sendRedirect(req.getContextPath() + INDEX_JSP);
-//        req.getRequestDispatcher("").forward(req, resp);
+        req.getRequestDispatcher(INDEX_JSP)
+                .forward(req, resp);
     }
 }
