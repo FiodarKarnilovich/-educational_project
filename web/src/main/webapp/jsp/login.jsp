@@ -12,13 +12,13 @@
                             <div class="card-body p-md-5 mx-md-4">
 
 
-                                <form name='f' action="/web/jsp/index_logged.jsp" method='POST'>
+                                <form name='f' action="/web/login" method="post">
                                     <p>Войдите в аккаунт</p>
 
                                     <div class="form-outline mb-4">
-                                        <input type="text" name="username" id="username" class="form-control"
+                                        <input type="email" name="email" id="email" class="form-control"
                                                placeholder="Введите email" />
-                                        <label class="form-label" for="username">Email</label>
+                                        <label class="form-label" for="email">Email</label>
                                     </div>
 
                                     <div class="form-outline mb-4">

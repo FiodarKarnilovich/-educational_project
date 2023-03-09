@@ -16,7 +16,7 @@
             <a class="nav-link active" aria-current="page" href="/web/jsp/index_logged.jsp">Home</a>
         </li>
 
-        <a class="nav-link" href="/web/jsp/index.jsp">Logout</a>
+        <a class="nav-link" href="/web/logout">Logout</a>
     </ul>
 </header>
 

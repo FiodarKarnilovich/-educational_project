@@ -22,7 +22,7 @@
 <header>
     <ul class="nav justify-content-end">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/web/jsp/index.jsp">Home</a>
+            <a class="nav-link active" aria-current="page" href="/web/jsp/index_logged.jsp">Home</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/web/jsp/contacts.jsp">Contacts</a>
@@ -31,7 +31,7 @@
             <a class="nav-link" href="/web/jsp/view_user_details.jsp">Profile</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/web/jsp/index.jsp">Logout</a>
+            <a class="nav-link" href="/web/logout">Logout</a>
         </li>
 
     </ul>

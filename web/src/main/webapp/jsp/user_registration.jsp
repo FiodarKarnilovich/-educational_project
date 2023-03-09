@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="_header.jsp"/>
 
-<form style="width: 50% ; margin-left: 10%" method="post" action="/web/jsp/user_registration.jsp">
+<form style="width: 50% ; margin-left: 10%" method="post" action="/web/userregistration">
     <h2>Регистрация нового пользователя</h2>
 
     <!-- 2 column grid layout with text inputs for the first and last names -->
@@ -33,12 +33,12 @@
     </div>
 
     <div class="form-outline mb-4">
-        <input type="text" name="birthDay" id="birthDay" class="form-control" />
+        <input type="date" name="birthDay" id="birthDay" class="form-control" />
         <label class="form-label" for="birthDay">Дата рождения</label>
     </div>
 
     <div class="form-outline mb-4">
-        <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" />
+        <input type="number" name="phoneNumber" id="phoneNumber" class="form-control" />
         <label class="form-label" for="phoneNumber">Номер телефона</label>
     </div>
 
