@@ -16,7 +16,7 @@
                     <div class="row g-0">
                         <div class="col-lg-6">
                             <div class="card-body p-md-5 mx-md-4">
-                                <form name='f' action="<%= request.getContextPath() %>/login" method="post">
+                                <form name='f' action="<%= request.getContextPath() %>" method="post">
                                     <p><%= request.getAttribute(NOT_AUTHENTICATED) != null ?
                                             "Данная страница для авторизованных пользователей." : ""%></p>
 
@@ -42,7 +42,7 @@
                                     <p class="mb-0 me-2">Нет аккаунта?</p>
                                 </div>
 
-                                <a href="<%= request.getContextPath() %>/jsp/user_registration.jsp">
+                                <a href="<%= request.getContextPath() %>/userregistration">
                                     <button class="btn btn-outline-danger">Регистрация</button>
                                 </a>
 

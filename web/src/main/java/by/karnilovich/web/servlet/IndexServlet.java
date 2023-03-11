@@ -17,9 +17,9 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String forwardJsp = req.getSession().getAttribute(LOGGED_IN_USER) == null ?
-                INDEX_JSP : "/jsp/index_logged.jsp";
+//        String forwardJsp = req.getSession().getAttribute(LOGGED_IN_USER) == null ?
+//                INDEX_JSP : "/jsp/index_logged.jsp";
 
-        req.getRequestDispatcher(forwardJsp).forward(req, resp);
+        req.getRequestDispatcher(INDEX_JSP).forward(req, resp);
     }
 }

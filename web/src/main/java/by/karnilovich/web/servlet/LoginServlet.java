@@ -15,8 +15,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static by.karnilovich.web.servlet.AuthFilter.LOGIN_JSP;
-import static by.karnilovich.web.servlet.AuthFilter.WEB_LOGIN;
+import static by.karnilovich.web.servlet.AuthFilter.*;
 
 @WebServlet(name = "LoginServlet", urlPatterns = WEB_LOGIN)
 public class LoginServlet extends HttpServlet {
@@ -55,7 +54,7 @@ public class LoginServlet extends HttpServlet {
                 LOGGER.info("User '{}' logged in into app", person.getEmail());
                 //TODO forward to main page
                 session.setAttribute(LOGGED_IN_USER, person);
-                req.getRequestDispatcher("/jsp/index_logged.jsp")
+                req.getRequestDispatcher(INDEX_JSP)
                         .forward(req, resp);
             }
         }

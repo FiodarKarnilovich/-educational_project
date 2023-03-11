@@ -1,3 +1,6 @@
+<%@ page import="static by.karnilovich.web.servlet.AuthFilter.NOT_AUTHENTICATED" %>
+<%@ page import="static by.karnilovich.web.servlet.AuthFilter.WEB_LOGOUT" %>
+<%@ page import="static by.karnilovich.web.servlet.AuthFilter.*" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>--%>
@@ -30,7 +33,12 @@
             <a class="nav-link" href="<%= request.getContextPath() %>/showlistcars">Rental Cars</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<%= request.getContextPath() %>/login">Login</a>
+
+            <a class="nav-link" href= <%= request.getAttribute(NOT_AUTHENTICATED) != null ?
+                    request.getContextPath() + "/logout" : request.getContextPath() + "/login" %>>
+                <%= request.getAttribute(NOT_AUTHENTICATED) != null ?
+                        "Logout" : "Login" %></a>
+
         </li>
 
     </ul>
