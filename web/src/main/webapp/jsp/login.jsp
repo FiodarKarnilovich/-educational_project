@@ -16,7 +16,7 @@
                     <div class="row g-0">
                         <div class="col-lg-6">
                             <div class="card-body p-md-5 mx-md-4">
-                                <form name='f' action="<%= request.getContextPath() %>" method="post">
+                                <form name='f' action="<%= request.getContextPath() %>/login" method="post">
                                     <p><%= request.getAttribute(NOT_AUTHENTICATED) != null ?
                                             "Данная страница для авторизованных пользователей." : ""%></p>
 

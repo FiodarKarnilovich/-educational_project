@@ -1,6 +1,7 @@
 <%@ page import="static by.karnilovich.web.servlet.AuthFilter.NOT_AUTHENTICATED" %>
 <%@ page import="static by.karnilovich.web.servlet.AuthFilter.WEB_LOGOUT" %>
 <%@ page import="static by.karnilovich.web.servlet.AuthFilter.*" %>
+<%@ page import="static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>--%>
@@ -34,9 +35,9 @@
         </li>
         <li class="nav-item">
 
-            <a class="nav-link" href= <%= request.getAttribute(NOT_AUTHENTICATED) != null ?
+            <a class="nav-link" href= <%= request.getAttribute(LOGGED_IN_USER) != null ?
                     request.getContextPath() + "/logout" : request.getContextPath() + "/login" %>>
-                <%= request.getAttribute(NOT_AUTHENTICATED) != null ?
+                <%= request.getAttribute(LOGGED_IN_USER) != null ?
                         "Logout" : "Login" %></a>
 
         </li>
