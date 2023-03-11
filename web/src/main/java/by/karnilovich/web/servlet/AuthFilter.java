@@ -27,6 +27,7 @@ public class AuthFilter implements Filter {
     public static final String WEB_LOGIN = "/login";
     public static final String WEB_LOGOUT = "/logout";
     public static final String WEB_CONTACTS = "/contacts";
+    public static final String WEB_SHOW_LIST_CARS = "/showlistcars";
     public static final String WEB_USER_REGISTRATION = "/userregistration";
 
     public static final List<String> NO_AUTH_URLS  = List.of(

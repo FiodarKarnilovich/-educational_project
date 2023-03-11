@@ -27,7 +27,7 @@
             <a class="nav-link" href="<%= request.getContextPath() %>/contacts">Contacts</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<%= request.getContextPath() %>/jsp/show_list_cars.jsp">Rental Cars</a>
+            <a class="nav-link" href="<%= request.getContextPath() %>/showlistcars">Rental Cars</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="<%= request.getContextPath() %>/login">Login</a>
