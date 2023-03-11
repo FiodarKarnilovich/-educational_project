@@ -13,7 +13,7 @@
 <header>
     <ul class="nav justify-content-end">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="<%= request.getContextPath() %>/jsp/index_logged.jsp">Home</a>
+            <a class="nav-link active" aria-current="page" href="<%= request.getContextPath() %>">Home</a>
         </li>
 
         <a class="nav-link" href="<%= request.getContextPath() %>/logout">Logout</a>

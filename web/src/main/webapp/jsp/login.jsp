@@ -5,6 +5,7 @@
 <%@ page import="static by.karnilovich.web.servlet.AuthFilter.NOT_AUTHENTICATED" %>
 <%@ page import="static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util.println" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/jsp/_header.jsp"/>
 
@@ -17,7 +18,7 @@
                         <div class="col-lg-6">
                             <div class="card-body p-md-5 mx-md-4">
                                 <form name='f' action="<%= request.getContextPath() %>/login" method="post">
-                                    <p><%= request.getAttribute(NOT_AUTHENTICATED) != null ?
+                                    <p><%= request.getAttribute(LOGGED_IN_USER) != null ?
                                             "Данная страница для авторизованных пользователей." : ""%></p>
 
                                     <p>Войдите в аккаунт</p>

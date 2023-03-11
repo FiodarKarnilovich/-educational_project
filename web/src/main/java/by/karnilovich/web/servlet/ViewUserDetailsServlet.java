@@ -12,16 +12,18 @@ import java.io.IOException;
 
 import static by.karnilovich.web.servlet.AuthFilter.*;
 
-@WebServlet(name = "ContactsServlet", urlPatterns = WEB_CONTACTS)
-public class ContactsServlet extends HttpServlet {
+@WebServlet(name = "ViewUserDetailsServlet", urlPatterns = WEB_VIEW_USER_DETAILS)
+public class ViewUserDetailsServlet extends HttpServlet {
 
-    private static final Logger LOGGER = LogManager.getLogger(ContactsServlet.class);
+    private static final Logger LOGGER = LogManager.getLogger(ViewUserDetailsServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        LOGGER.debug(" -> contacts.jsp");
-        req.getRequestDispatcher(CONTACTS_JSP).forward(req, resp);
+        LOGGER.debug(" -> view_user_details.jsp");
+        req.getRequestDispatcher(VIEW_USER_DETAILS_JSP).forward(req, resp);
 
     }
+
+
 }
