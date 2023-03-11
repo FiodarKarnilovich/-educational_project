@@ -1,5 +1,4 @@
 <%@ page import="static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER" %>
-<%@ page import="static by.karnilovich.web.servlet.AuthFilter.NOT_AUTHENTICATED" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<jsp:directive.page contentType="text/html; charset=UTF-8" />--%>
@@ -14,13 +13,17 @@
 <body>
 <header>
     <ul class="nav justify-content-end">
-        <li class="nav-item">
 
+        <li class="nav-item">
+            <a class="nav-link">hi, <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
+            request.getSession().getAttribute("userName") : "guest" %> </a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link" href= <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
                     request.getContextPath() + "/viewuserdetails" : "" %>>
                 <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
                         "Profile" : "" %></a>
-
         </li>
 
         <li class="nav-item">

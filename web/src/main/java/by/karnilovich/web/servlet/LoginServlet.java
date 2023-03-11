@@ -54,6 +54,7 @@ public class LoginServlet extends HttpServlet {
                 LOGGER.info("User '{}' logged in into app", person.getEmail());
                 //TODO forward to main page
                 session.setAttribute(LOGGED_IN_USER, person);
+                session.setAttribute("userName", person.getFirstName());
                 req.getRequestDispatcher(INDEX_JSP)
                         .forward(req, resp);
             }

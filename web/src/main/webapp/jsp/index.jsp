@@ -22,6 +22,12 @@
 
 <header>
     <ul class="nav justify-content-end">
+
+        <li class="nav-item">
+            <a class="nav-link">hi, <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
+                    request.getSession().getAttribute("userName") : "guest" %> </a>
+        </li>
+
         <li class="nav-item">
 
             <a class="nav-link" href= <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
