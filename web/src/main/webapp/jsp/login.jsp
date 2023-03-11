@@ -17,15 +17,8 @@
                         <div class="col-lg-6">
                             <div class="card-body p-md-5 mx-md-4">
                                 <form name='f' action="<%= request.getContextPath() %>/login" method="post">
-<%--                                    <p><%--%>
-<%--                                        if ((request.getSession().getAttribute(NOT_AUTHENTICATED)) != null) {--%>
-<%--                                            response.getWriter().println("Данная страница для авторизованных пользователей. /n" +--%>
-<%--                                                    "Войдите в аккаунт");--%>
-<%--                                        } else {--%>
-<%--                                            response.getWriter().println("Войдите в аккаунт");--%>
-<%--                                        }--%>
-<%--                                        request.getSession().removeAttribute(NOT_AUTHENTICATED);--%>
-<%--                                    %></p>--%>
+                                    <p><%= request.getAttribute(NOT_AUTHENTICATED) != null ?
+                                            "Данная страница для авторизованных пользователей." : ""%></p>
 
                                     <p>Войдите в аккаунт</p>
 

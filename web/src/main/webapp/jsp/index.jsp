@@ -21,16 +21,16 @@
 <header>
     <ul class="nav justify-content-end">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="<%= request.getContextPath() %>/jsp/index.jsp">Home</a>
+            <a class="nav-link active" aria-current="page" href="<%= request.getContextPath() %>">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<%= request.getContextPath() %>/jsp/contacts.jsp">Contacts</a>
+            <a class="nav-link" href="<%= request.getContextPath() %>/contacts">Contacts</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="<%= request.getContextPath() %>/jsp/show_list_cars.jsp">Rental Cars</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<%= request.getContextPath() %>/jsp/login.jsp">Login</a>
+            <a class="nav-link" href="<%= request.getContextPath() %>/login">Login</a>
         </li>
 
     </ul>

@@ -26,6 +26,11 @@ public class LoginServlet extends HttpServlet {
     public static final String LOGGED_IN_USER = "logged_in_user";
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher(LOGIN_JSP).forward(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String email = req.getParameter("email");
         final String password = req.getParameter("password");
@@ -50,7 +55,7 @@ public class LoginServlet extends HttpServlet {
                 LOGGER.info("User '{}' logged in into app", person.getEmail());
                 //TODO forward to main page
                 session.setAttribute(LOGGED_IN_USER, person);
-                req.getRequestDispatcher("/web/jsp/index_logged.jsp")
+                req.getRequestDispatcher("/jsp/index_logged.jsp")
                         .forward(req, resp);
             }
         }

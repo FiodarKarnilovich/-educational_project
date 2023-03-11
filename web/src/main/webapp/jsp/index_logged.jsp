@@ -23,7 +23,7 @@
             <a class="nav-link active" aria-current="page" href="<%= request.getContextPath() %>/jsp/index_logged.jsp">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<%= request.getContextPath() %>/jsp/contacts.jsp">Contacts</a>
+            <a class="nav-link" href="<%= request.getContextPath() %>/contacts">Contacts</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="<%= request.getContextPath() %>/jsp/view_user_details.jsp">Profile</a>

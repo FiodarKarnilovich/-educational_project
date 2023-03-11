@@ -26,6 +26,7 @@ public class AuthFilter implements Filter {
     public static final String USER_REGISTRATION_JSP = "/web/jsp/user_registration.jsp";
     public static final String WEB_LOGIN = "/login";
     public static final String WEB_LOGOUT = "/logout";
+    public static final String WEB_CONTACTS = "/contacts";
     public static final String WEB_USER_REGISTRATION = "/userregistration";
 
     public static final List<String> NO_AUTH_URLS  = List.of(
@@ -50,7 +51,12 @@ public class AuthFilter implements Filter {
 //            res.sendError(404);
             String requestURL = requestURI.replaceFirst(req.getContextPath(), "");
 
-            if (NO_AUTH_URLS.contains(requestURL)) {
+//            if (requestURL.startsWith("/jsp/")) {
+//                res.sendError(404);
+//                return;
+//            }
+
+            if (NO_AUTH_URLS.contains(requestURL) || requestURL.startsWith("/img/")) {
                 LOGGER.debug("Authentication is no required-  " + requestURI);
                 filterChain.doFilter(servletRequest, servletResponse);
             } else if ((Objects.nonNull(session)) && (session.getAttribute(LOGGED_IN_USER) != null)) {
