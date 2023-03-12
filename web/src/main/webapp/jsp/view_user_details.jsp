@@ -1,9 +1,15 @@
 <%@ page import="by.karnilovich.service.person.PersonService" %>
+<%@ page import="by.karnilovich.model.Person" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/jsp/_header.jsp"/>
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>--%>
 
 <%--<c:set value="${person}" var="person"/>--%>
+
+<%-- хотелось бы вычитывать из одного обьекта--%>
+<%--<%!--%>
+<%--    Person person = PersonService.findByEmail(request.getSession().getAttribute("email"));--%>
+<%--%>--%>
 
 <table class="table">
     <thead>

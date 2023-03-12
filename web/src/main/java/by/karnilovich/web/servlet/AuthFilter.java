@@ -33,6 +33,8 @@ public class AuthFilter implements Filter {
     public static final String WEB_LOGOUT = "/logout";
     public static final String VIEW_USER_DETAILS_JSP = "/jsp/view_user_details.jsp";
     public static final String WEB_VIEW_USER_DETAILS = "/viewuserdetails";
+    public static final String WEB_ADMIN = "/admin";
+    public static final String ADMIN_JSP = "/jsp/admin.jsp";
 
     public static final List<String> NO_AUTH_URLS  = List.of(
             INDEX_MAIN, INDEX_JSP, CONTACTS_JSP, SHOW_LIST_CARS_JSP, WEB_SHOW_LIST_CARS, LOGIN_JSP, USER_REG,
