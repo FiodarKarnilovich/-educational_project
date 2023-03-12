@@ -11,8 +11,9 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 
 import static by.karnilovich.web.servlet.AuthFilter.ADMIN_JSP;
+import static by.karnilovich.web.servlet.AuthFilter.WEB_LOGIN;
 
-@WebServlet(name = "AdminServlet", urlPatterns = "/admin")
+@WebServlet(name = "AdminServlet", urlPatterns = WEB_LOGIN)
 public class AdminServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(AdminServlet.class);

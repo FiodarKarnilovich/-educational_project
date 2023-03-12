@@ -1,5 +1,5 @@
 <%@ page import="by.karnilovich.service.person.PersonService" %>
-<%@ page import="by.karnilovich.model.Person" %>
+<%@ page import="by.karnilovich.entity.person.Person" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/jsp/_header.jsp"/>
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>--%>

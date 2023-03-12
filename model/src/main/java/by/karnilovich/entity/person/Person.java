@@ -1,4 +1,4 @@
-package by.karnilovich.model;
+package by.karnilovich.entity.person;
 
 public class Person {
 

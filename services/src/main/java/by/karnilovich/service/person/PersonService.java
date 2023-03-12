@@ -1,6 +1,6 @@
 package by.karnilovich.service.person;
 
-import by.karnilovich.model.Person;
+import by.karnilovich.entity.person.Person;
 
 import java.util.ArrayList;
 import java.util.List;

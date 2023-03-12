@@ -1,6 +1,6 @@
 package by.karnilovich.web.servlet;
 
-import by.karnilovich.model.Person;
+import by.karnilovich.entity.person.Person;
 import by.karnilovich.service.person.PersonService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
