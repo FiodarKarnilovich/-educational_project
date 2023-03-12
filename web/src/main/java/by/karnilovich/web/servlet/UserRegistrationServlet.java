@@ -13,8 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-import static by.karnilovich.web.servlet.AuthFilter.LOGIN_JSP;
-import static by.karnilovich.web.servlet.AuthFilter.WEB_USER_REGISTRATION;
+import static by.karnilovich.web.servlet.AuthFilter.*;
 
 
 @WebServlet(name = "UserRegistrationServlet", urlPatterns = WEB_USER_REGISTRATION)
@@ -36,7 +35,7 @@ public class UserRegistrationServlet extends HttpServlet {
         PersonUtil.addPersonToList(person);
 
         LOGGER.info("User '{}' added in app", person.getEmail());
-        resp.sendRedirect(LOGIN_JSP);
+        resp.sendRedirect(req.getContextPath() + WEB_LOGIN);
 
     }
 }
