@@ -5,10 +5,10 @@
 <h1> Введите данные новой машины </h1>
 
 <form style="width: 50% ; margin-left: 10%" method="post" action="<%= request.getContextPath() %>/newcarregistration" enctype="multipart/form-data">
-    <div class="mb-3">
-        <label for="autoPicture" class="form-label">Фото машины</label>
-        <input type="file" name="autoPicture" class="form-control" id="autoPicture">
-    </div>
+<%--    <div class="mb-3">--%>
+<%--        <label for="autoPicture" class="form-label">Фото машины</label>--%>
+<%--        <input type="file" name="autoPicture" class="form-control" id="autoPicture">--%>
+<%--    </div>--%>
     <!-- бренд авто -->
     <div class="mb-3">
         <label for="autoBrand" class="form-label">Бренд</label>
@@ -38,14 +38,14 @@
     <!-- год авто -->
     <div class="mb-3">
         <label for="yearAuto" class="form-label">Год</label>
-        <input type="text" name="yearAuto" class="form-control" id="yearAuto" aria-describedby="nameHelp">
+        <input type="number" name="yearAuto" class="form-control" id="yearAuto" aria-describedby="nameHelp">
         <div class="form-text">Введите год авто</div>
     </div>
 
     <!-- цена авто -->
     <div class="mb-3">
         <label for="priceAuto" class="form-label">Цена</label>
-        <input type="text" name="priceAuto" class="form-control" id="priceAuto" aria-describedby="nameHelp">
+        <input type="number" name="priceAuto" class="form-control" id="priceAuto" aria-describedby="nameHelp">
         <div class="form-text">Введите цену за сутки</div>
     </div>
     <button type="submit" class="btn btn-primary">Зарегистрировать</button>

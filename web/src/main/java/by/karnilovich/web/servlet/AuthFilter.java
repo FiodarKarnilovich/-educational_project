@@ -18,6 +18,7 @@ import static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER;
 public class AuthFilter implements Filter {
 
     private static final Logger LOGGER = LogManager.getLogger(AuthFilter.class);
+
     public static final String INDEX_MAIN = "/";
     public static final String INDEX_JSP = "/jsp/index.jsp";
     public static final String CONTACTS_JSP = "/jsp/contacts.jsp";
@@ -38,6 +39,7 @@ public class AuthFilter implements Filter {
     public static final String ADMIN_JSP = "/jsp/admin.jsp";
     public static final String CAR_REG = "/carreg";
     public static final String CAR_REGISTRATION_JSP = "/jsp/new_car_registration.jsp";
+    public static final String WEB_CAR_REGISTRATION = "/newcarregistration";
 
     public static final List<String> NO_AUTH_URLS  = List.of(
             INDEX_MAIN, INDEX_JSP, CONTACTS_JSP, SHOW_LIST_CARS_JSP, WEB_SHOW_LIST_CARS, LOGIN_JSP, USER_REG,

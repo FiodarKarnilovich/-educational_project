@@ -6,7 +6,11 @@
 </head>
 <body>
 
-<H2>Страница админа</H2>>
+<H2>Страница админа</H2>
+
+<a href="<%= request.getContextPath() %>/carreg">
+    <button class="btn btn-outline-danger">Добавить авто</button>
+</a>
 
 </body>
 </html>
