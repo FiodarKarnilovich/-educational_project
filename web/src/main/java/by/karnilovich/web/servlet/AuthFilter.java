@@ -23,18 +23,19 @@ public class AuthFilter implements Filter {
     public static final String CONTACTS_JSP = "/jsp/contacts.jsp";
     public static final String SHOW_LIST_CARS_JSP = "/jsp/show_list_cars.jsp";
     public static final String LOGIN_JSP = "/jsp/login.jsp";
-    public static final String USER_REGISTRATION_JSP = "/web/jsp/user_registration.jsp";
+    public static final String USER_REGISTRATION_JSP = "/jsp/user_registration.jsp";
     public static final String WEB_LOGIN = "/login";
     public static final String WEB_CONTACTS = "/contacts";
     public static final String WEB_SHOW_LIST_CARS = "/showlistcars";
     public static final String WEB_USER_REGISTRATION = "/userregistration";
+    public static final String USER_REG = "/userreg";
 
     public static final String WEB_LOGOUT = "/logout";
     public static final String VIEW_USER_DETAILS_JSP = "/jsp/view_user_details.jsp";
     public static final String WEB_VIEW_USER_DETAILS = "/viewuserdetails";
 
     public static final List<String> NO_AUTH_URLS  = List.of(
-            INDEX_MAIN, INDEX_JSP, CONTACTS_JSP, SHOW_LIST_CARS_JSP, WEB_SHOW_LIST_CARS, LOGIN_JSP,
+            INDEX_MAIN, INDEX_JSP, CONTACTS_JSP, SHOW_LIST_CARS_JSP, WEB_SHOW_LIST_CARS, LOGIN_JSP, USER_REG,
             USER_REGISTRATION_JSP, WEB_LOGIN, WEB_CONTACTS, WEB_SHOW_LIST_CARS, WEB_USER_REGISTRATION, WEB_LOGOUT);
 
     public static final String NOT_AUTHENTICATED = "User is not authenticated";

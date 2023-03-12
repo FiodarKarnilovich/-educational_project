@@ -14,10 +14,10 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 
 import static by.karnilovich.web.servlet.AuthFilter.LOGIN_JSP;
-import static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER;
+import static by.karnilovich.web.servlet.AuthFilter.WEB_USER_REGISTRATION;
 
 
-@WebServlet(name = "UserRegistrationServlet", urlPatterns = "/userregistration")
+@WebServlet(name = "UserRegistrationServlet", urlPatterns = WEB_USER_REGISTRATION)
 public class UserRegistrationServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(UserRegistrationServlet.class);
@@ -32,7 +32,7 @@ public class UserRegistrationServlet extends HttpServlet {
         final String birthDay = req.getParameter("birthDay");
         final String phoneNumber = req.getParameter("phoneNumber");
 
-        Person person = new Person(firstName, lastName, email, password, birthDay, phoneNumber, "user");
+        Person person = new Person(firstName, lastName, email, password, birthDay, phoneNumber, "ROLE_USER");
         PersonUtil.addPersonToList(person);
 
         LOGGER.info("User '{}' added in app", person.getEmail());

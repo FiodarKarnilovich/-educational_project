@@ -39,13 +39,19 @@
                                     </div>
                                 </form>
 
-                                <div class="d-flex align-items-center justify-content-center pb-4">
-                                    <p class="mb-0 me-2">Нет аккаунта?</p>
+                                <div class="d-flex align-items-down justify-content-left pb-4">
+                                    <p class="mb-0 me-2"><br>Нет аккаунта?</p>
                                 </div>
 
-                                <a href="<%= request.getContextPath() %>/userregistration">
-                                    <button class="btn btn-outline-danger">Регистрация</button>
-                                </a>
+                                <form name='f' action="<%= request.getContextPath() %>/userreg" >
+                                    <div class="mt-4 pt-2">
+                                        <input class="btn btn-outline-danger" type="submit" value="Регистрация" />
+                                    </div>
+                                </form>
+
+<%--                                <a href="<%= request.getContextPath() %>/userregistration">--%>
+<%--                                    <button class="btn btn-outline-danger">Регистрация</button>--%>
+<%--                                </a>--%>
 
                             </div>
                         </div>
