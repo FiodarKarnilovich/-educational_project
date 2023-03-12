@@ -23,4 +23,11 @@ public class PersonService {
         personList.add(person);
         return personList;
     }
+
+    public static Person findByEmail(String email) {
+
+        return PersonService.getPersonList().stream()
+                .filter(p -> p.getEmail().equalsIgnoreCase(email))
+                .findFirst().orElse(null);
+    }
 }
