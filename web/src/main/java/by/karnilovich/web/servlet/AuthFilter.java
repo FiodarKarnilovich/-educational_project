@@ -14,7 +14,7 @@ import java.util.Objects;
 
 import static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER;
 
-@WebFilter(urlPatterns = "/*")
+@WebFilter(filterName = "AuthFilter", urlPatterns = "/*")
 public class AuthFilter implements Filter {
 
     private static final Logger LOGGER = LogManager.getLogger(AuthFilter.class);
