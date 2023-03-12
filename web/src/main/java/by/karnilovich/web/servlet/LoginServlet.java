@@ -1,6 +1,6 @@
 package by.karnilovich.web.servlet;
 
-import by.karnilovich.web.util.PersonUtil;
+import by.karnilovich.service.person.PersonService;
 import by.karnilovich.model.Person;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
             writer.println("Please, Enter login and password");
             resp.sendRedirect(LOGIN_JSP);
         } else {
-            Person person = PersonUtil.getPersonList().stream()
+            Person person = PersonService.getPersonList().stream()
                     .filter(p -> p.getEmail().equalsIgnoreCase(email))
                     .filter(p -> p.getPassword().equals(password))
                     .findFirst().orElse(null);

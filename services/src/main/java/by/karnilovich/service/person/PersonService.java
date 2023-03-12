@@ -1,11 +1,11 @@
-package by.karnilovich.web.util;
+package by.karnilovich.service.person;
 
 import by.karnilovich.model.Person;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonUtil {
+public class PersonService {
 
     private static List<Person> personList = new ArrayList<>(){
         {

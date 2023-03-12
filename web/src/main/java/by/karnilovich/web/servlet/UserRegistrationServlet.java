@@ -1,13 +1,12 @@
 package by.karnilovich.web.servlet;
 
-import by.karnilovich.web.util.PersonUtil;
 import by.karnilovich.model.Person;
+import by.karnilovich.service.person.PersonService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,7 +31,7 @@ public class UserRegistrationServlet extends HttpServlet {
         final String phoneNumber = req.getParameter("phoneNumber");
 
         Person person = new Person(firstName, lastName, email, password, birthDay, phoneNumber, "ROLE_USER");
-        PersonUtil.addPersonToList(person);
+        PersonService.addPersonToList(person);
 
         LOGGER.info("User '{}' added in app", person.getEmail());
         resp.sendRedirect(req.getContextPath() + WEB_LOGIN);
