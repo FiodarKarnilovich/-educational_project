@@ -1,5 +1,4 @@
 <%@ page import="static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER" %>
-<%@ page import="static by.karnilovich.web.servlet.AuthFilter.NOT_AUTHENTICATED" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>--%>

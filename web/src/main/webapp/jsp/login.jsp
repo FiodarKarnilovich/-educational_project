@@ -1,10 +1,4 @@
-<%@ page import="jakarta.servlet.http.HttpSession" %>
-<%@ page import="jakarta.servlet.http.HttpServletRequest" %>
-<%@ page import="jakarta.servlet.ServletRequest" %>
-<%@ page import="jakarta.servlet.ServletResponse" %>
-<%@ page import="static by.karnilovich.web.servlet.AuthFilter.NOT_AUTHENTICATED" %>
-<%@ page import="static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util.println" %>
-<%@ page import="java.io.PrintWriter" %>
+
 <%@ page import="static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/jsp/_header.jsp"/>

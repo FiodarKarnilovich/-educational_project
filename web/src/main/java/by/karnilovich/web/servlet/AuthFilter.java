@@ -38,7 +38,6 @@ public class AuthFilter implements Filter {
             INDEX_MAIN, INDEX_JSP, CONTACTS_JSP, SHOW_LIST_CARS_JSP, WEB_SHOW_LIST_CARS, LOGIN_JSP, USER_REG,
             USER_REGISTRATION_JSP, WEB_LOGIN, WEB_CONTACTS, WEB_SHOW_LIST_CARS, WEB_USER_REGISTRATION, WEB_LOGOUT);
 
-    public static final String NOT_AUTHENTICATED = "User is not authenticated";
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -54,7 +53,6 @@ public class AuthFilter implements Filter {
             HttpSession session = req.getSession();
             String requestURI = req.getRequestURI();
 
-//            res.sendError(404);
             String requestURL = requestURI.replaceFirst(req.getContextPath(), "");
 
             if (requestURL.startsWith("/jsp/")) {
@@ -70,7 +68,6 @@ public class AuthFilter implements Filter {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 LOGGER.debug("User is not authenticated. Redirect to login page " + requestURI);
-          //      req.setAttribute(NOT_AUTHENTICATED,"User is not authenticated" );
                 req.getRequestDispatcher(LOGIN_JSP)
                         .forward(servletRequest, servletResponse);
             }

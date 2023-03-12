@@ -24,8 +24,6 @@ public class IndexServlet extends HttpServlet {
         LOGGER.debug(req.getSession().getAttribute(LOGGED_IN_USER) != null ?
               "user logged - true" : "user logged - false");
 
-        LOGGER.debug(req.getAttributeNames());
-
        req.getRequestDispatcher(INDEX_JSP).forward(req, resp);
    }
 }
