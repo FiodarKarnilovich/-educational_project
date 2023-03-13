@@ -27,7 +27,7 @@
     <tr>
 
         <td></td>
-        <td><%= PersonService.findByEmail((String)request.getSession().getAttribute("email")).getFirstName()%></td>
+        <td><%= ((Person) request.getAttribute("person")).getFirstName()%></td>
         <td><%= PersonService.findByEmail((String)request.getSession().getAttribute("email")).getLastName()%></td>
         <td><%= PersonService.findByEmail((String)request.getSession().getAttribute("email")).getEmail()%></td>
         <td><%= PersonService.findByEmail((String)request.getSession().getAttribute("email")).getBirthDay()%></td>

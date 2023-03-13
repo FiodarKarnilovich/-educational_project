@@ -10,19 +10,13 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-import static by.karnilovich.web.servlet.AuthFilter.USER_REG;
+//import static by.karnilovich.web.servlet.AuthFilter.USER_REG;
 import static by.karnilovich.web.servlet.AuthFilter.USER_REGISTRATION_JSP;
 
-@WebServlet(name = "UserRegistrationJspServlet", urlPatterns = USER_REG)
+//@WebServlet(name = "UserRegistrationJspServlet", urlPatterns = USER_REG)
 public class UserRegistrationJspServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(UserRegistrationJspServlet.class);
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        LOGGER.debug(" -> user_registration.jsp");
-        req.getRequestDispatcher(USER_REGISTRATION_JSP).forward(req, resp);
-
-    }
 }

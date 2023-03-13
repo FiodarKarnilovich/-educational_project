@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import static by.karnilovich.web.servlet.LoginServlet.EXTRA_MESSAGE;
 import static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER;
 
 @WebFilter(filterName = "AuthFilter", urlPatterns = "/*")
@@ -28,8 +29,8 @@ public class AuthFilter implements Filter {
     public static final String WEB_LOGIN = "/login";
     public static final String WEB_CONTACTS = "/contacts";
     public static final String WEB_SHOW_LIST_CARS = "/showlistcars";
-    public static final String WEB_USER_REGISTRATION = "/userregistration";
-    public static final String USER_REG = "/userreg";
+    public static final String WEB_USER_REGISTRATION = "/registration";
+//    public static final String USER_REG = "/userreg";
 
 
     public static final String WEB_LOGOUT = "/logout";
@@ -42,8 +43,8 @@ public class AuthFilter implements Filter {
     public static final String WEB_CAR_REGISTRATION = "/newcarregistration";
 
     public static final List<String> NO_AUTH_URLS  = List.of(
-            INDEX_MAIN, INDEX_JSP, CONTACTS_JSP, SHOW_LIST_CARS_JSP, WEB_SHOW_LIST_CARS, LOGIN_JSP, USER_REG,
-            USER_REGISTRATION_JSP, WEB_LOGIN, WEB_CONTACTS, WEB_SHOW_LIST_CARS, WEB_USER_REGISTRATION, WEB_LOGOUT);
+            INDEX_MAIN, WEB_SHOW_LIST_CARS, WEB_LOGIN, WEB_CONTACTS,
+            WEB_SHOW_LIST_CARS, WEB_USER_REGISTRATION, WEB_LOGOUT);
 
 
     @Override
@@ -75,6 +76,7 @@ public class AuthFilter implements Filter {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 LOGGER.debug("User is not authenticated. Redirect to login page " + requestURI);
+                req.setAttribute(EXTRA_MESSAGE, "Данная страница для авторизованных пользователей.");
                 req.getRequestDispatcher(LOGIN_JSP)
                         .forward(servletRequest, servletResponse);
             }

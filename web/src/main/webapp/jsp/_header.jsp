@@ -1,6 +1,6 @@
-<%@ page import="static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER" %>
 <%--<jsp:directive.page contentType="text/html; charset=UTF-8" />--%>
 <head>
     <meta charset="utf-8">

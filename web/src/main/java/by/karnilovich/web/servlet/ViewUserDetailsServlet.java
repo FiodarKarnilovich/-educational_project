@@ -1,5 +1,6 @@
 package by.karnilovich.web.servlet;
 
+import by.karnilovich.entity.person.Person;
 import by.karnilovich.service.person.PersonService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,6 +26,9 @@ public class ViewUserDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         LOGGER.debug(" -> view_user_details.jsp");
+        String email = (String)req.getSession().getAttribute("email");
+        Person person = PersonService.findByEmail(email);
+        req.setAttribute("person", person);
         req.getRequestDispatcher(VIEW_USER_DETAILS_JSP).forward(req, resp);
 
     }

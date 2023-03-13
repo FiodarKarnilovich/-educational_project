@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/jsp/_header.jsp"/>
 
-<form style="width: 50% ; margin-left: 10%" method="post" action="<%= request.getContextPath() %>/userregistration">
+<form style="width: 50% ; margin-left: 10%" method="post" action="<%= request.getContextPath() %>/registration">
     <h2>Регистрация нового пользователя</h2>
 
     <div class="row mb-4">

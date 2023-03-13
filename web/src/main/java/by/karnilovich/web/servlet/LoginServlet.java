@@ -23,9 +23,16 @@ public class LoginServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(LoginServlet.class);
 
     public static final String LOGGED_IN_USER = "logged_in_user";
+    public static final String EXTRA_MESSAGE = "extra_message";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = StringUtils.trimToEmpty(req.getParameter("extra_message"));
+        switch (action) {
+            case "successful_registration" -> req.setAttribute(EXTRA_MESSAGE, "Вы успешно зарегистрированы");
+            case "no_authorized" -> req.setAttribute(EXTRA_MESSAGE, "Данная страница для авторизованных пользователей.");
+        }
+
         req.getRequestDispatcher(LOGIN_JSP).forward(req, resp);
     }
 

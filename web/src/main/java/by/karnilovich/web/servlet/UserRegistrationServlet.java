@@ -21,6 +21,14 @@ public class UserRegistrationServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(UserRegistrationServlet.class);
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        LOGGER.debug(" -> user_registration.jsp");
+        req.getRequestDispatcher(USER_REGISTRATION_JSP).forward(req, resp);
+
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         final String firstName = req.getParameter("firstName");
@@ -34,7 +42,7 @@ public class UserRegistrationServlet extends HttpServlet {
         PersonService.addPersonToList(person);
 
         LOGGER.info("User '{}' added in app", person.getEmail());
-        resp.sendRedirect(req.getContextPath() + WEB_LOGIN);
+        resp.sendRedirect(req.getContextPath() + WEB_LOGIN + "?extra_message=successful_registration");
 
     }
 }

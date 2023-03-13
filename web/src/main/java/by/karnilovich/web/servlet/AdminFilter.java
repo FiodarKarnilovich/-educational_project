@@ -1,5 +1,6 @@
 package by.karnilovich.web.servlet;
 
+import by.karnilovich.entity.person.Person;
 import by.karnilovich.service.person.PersonService;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
@@ -32,13 +33,15 @@ public class AdminFilter implements Filter {
 
         String requestURL = requestURI.replaceFirst(req.getContextPath(), "");
 
-        if ((Objects.nonNull(session)) && PersonService.findByEmail((String)req.getSession().getAttribute("email")).getRole().equals("ROLE_ADMIN")) {
-            LOGGER.debug("Authentication with ROLE_ADMIN " + requestURI);
+        Person person = (Person) req.getSession().getAttribute(LOGGED_IN_USER);
+        if (person.getRole().equals("ROLE_ADMIN")) {
+            LOGGER.debug("Authorization with ROLE_ADMIN " + requestURI);
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             LOGGER.debug("User is not authorized. Redirect to login page " + requestURI);
-            req.getRequestDispatcher(LOGIN_JSP)
-                    .forward(servletRequest, servletResponse);
+            res.sendError(403);
+//            req.getRequestDispatcher(LOGIN_JSP)
+//                    .forward(servletRequest, servletResponse);
         }
     }
 }
