@@ -5,26 +5,25 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 
 import static by.karnilovich.web.servlet.AuthFilter.*;
+import static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER;
 
-@WebServlet(name = "LogOutServlet", urlPatterns = WEB_LOGOUT)
-public class LogOutServlet extends HttpServlet {
+@WebServlet(name = "IndexServlet", urlPatterns = "")
+public class IndexServlet extends HttpServlet {
 
-    private static final Logger LOGGER = LogManager.getLogger(LogOutServlet.class);
-
-
+    private static final Logger LOGGER = LogManager.getLogger(IndexServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        LOGGER.info("User logout");
-        session.invalidate();
-        LOGGER.info("session closed");
-        req.getRequestDispatcher(INDEX_JSP)
-                .forward(req, resp);
-    }
+
+
+        LOGGER.debug(req.getSession().getAttribute(LOGGED_IN_USER) != null ?
+              "user logged - true" : "user logged - false");
+
+       req.getRequestDispatcher(INDEX_JSP).forward(req, resp);
+   }
 }

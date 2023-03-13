@@ -1,24 +1,15 @@
-<!DOCTYPE html>
+<%@ page import="by.karnilovich.service.person.PersonService" %>
+<%@ page import="by.karnilovich.entity.person.Person" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<jsp:directive.page contentType="text/html; charset=UTF-8" />--%>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+<jsp:include page="/jsp/_header.jsp"/>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>--%>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
-<header>
-    <ul class="nav justify-content-end">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/web/jsp/index_logged.jsp">Home</a>
-        </li>
+<%--<c:set value="${person}" var="person"/>--%>
 
-        <a class="nav-link" href="/web/logout">Logout</a>
-    </ul>
-</header>
+<%-- хотелось бы вычитывать из одного обьекта--%>
+<%--<%!--%>
+<%--    Person person = PersonService.findByEmail(request.getSession().getAttribute("email"));--%>
+<%--%>--%>
 
 <table class="table">
     <thead>
@@ -33,9 +24,18 @@
     </tr>
     </thead>
     <tbody>
+    <tr>
 
+        <td></td>
+        <td><%= ((Person) request.getAttribute("person")).getFirstName()%></td>
+        <td><%= PersonService.findByEmail((String)request.getSession().getAttribute("email")).getLastName()%></td>
+        <td><%= PersonService.findByEmail((String)request.getSession().getAttribute("email")).getEmail()%></td>
+        <td><%= PersonService.findByEmail((String)request.getSession().getAttribute("email")).getBirthDay()%></td>
+        <td><%= PersonService.findByEmail((String)request.getSession().getAttribute("email")).getPhoneNumber()%></td>
+        <td><%= PersonService.findByEmail((String)request.getSession().getAttribute("email")).getRole()%></td>
+    </tr>
 
     </tbody>
 </table>
 
-<jsp:include page="_footer.jsp"/>
+<jsp:include page="/jsp/_footer.jsp"/>

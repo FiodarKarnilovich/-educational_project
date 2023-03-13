@@ -5,26 +5,23 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 
 import static by.karnilovich.web.servlet.AuthFilter.*;
 
-@WebServlet(name = "LogOutServlet", urlPatterns = WEB_LOGOUT)
-public class LogOutServlet extends HttpServlet {
+@WebServlet(name = "NewCarRegistrationJspServlet", urlPatterns = CAR_REG)
+public class NewCarRegistrationJspServlet extends HttpServlet {
 
-    private static final Logger LOGGER = LogManager.getLogger(LogOutServlet.class);
-
+    private static final Logger LOGGER = LogManager.getLogger(NewCarRegistrationJspServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        LOGGER.info("User logout");
-        session.invalidate();
-        LOGGER.info("session closed");
-        req.getRequestDispatcher(INDEX_JSP)
-                .forward(req, resp);
+
+        LOGGER.debug(" -> new_car_registration.jsp");
+        req.getRequestDispatcher(CAR_REGISTRATION_JSP).forward(req, resp);
+
     }
 }

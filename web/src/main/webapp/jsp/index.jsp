@@ -1,5 +1,7 @@
+<%@ page import="static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>--%>
 
 <html>
 <head>
@@ -10,31 +12,52 @@
     <title>index</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<%--https://www.teahub.io/photos/full/19-198007_audi-r8-black-red.jpg--%>
-<%--${pageContext.request.contextPath}/img/home-img.jpg--%>
 
-<body style="background-image: url(https://www.teahub.io/photos/full/19-198007_audi-r8-black-red.jpg);
-      height: 100vh;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;">
+<body style="background-image: url(<%= request.getContextPath() %>/img/home-img.jpg);
+        height: 100vh;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;">
 
 <header>
     <ul class="nav justify-content-end">
+
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/web/jsp/index.jsp">Home</a>
+            <a class="nav-link">hi, <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
+                    request.getSession().getAttribute("userName") : "guest" %> </a>
+        </li>
+
+        <li class="nav-item">
+
+            <a class="nav-link" href= <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
+                    request.getContextPath() + "/viewuserdetails" : "" %>>
+                <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
+                        "Profile" : "" %></a>
+
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="<%= request.getContextPath() %>">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/web/jsp/contacts.jsp">Contacts</a>
+            <a class="nav-link" href="<%= request.getContextPath() %>/contacts">Contacts</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/web/jsp/show_list_cars.jsp">Rental Cars</a>
+            <a class="nav-link" href="<%= request.getContextPath() %>/showlistcars">Rental Cars</a>
         </li>
+
+
+
         <li class="nav-item">
-                <a class="nav-link" href="/web/jsp/login.jsp">Login</a>
+
+            <a class="nav-link" href= <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
+                    request.getContextPath() + "/logout" : request.getContextPath() + "/login" %>>
+                <%=request.getSession().getAttribute(LOGGED_IN_USER) != null ?
+                        "Logout" : "Login" %></a>
+
         </li>
 
     </ul>
 </header>
 
-<jsp:include page="_footer.jsp"/>
+<jsp:include page="/jsp/_footer.jsp"/>

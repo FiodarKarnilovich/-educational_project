@@ -1,7 +1,7 @@
 package by.karnilovich.web.servlet;
 
-import by.karnilovich.web.util.PersonUtil;
-import by.karnilovich.model.Person;
+import by.karnilovich.service.person.PersonService;
+import by.karnilovich.entity.person.Person;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,14 +15,26 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static by.karnilovich.web.servlet.AuthFilter.LOGIN_JSP;
+import static by.karnilovich.web.servlet.AuthFilter.*;
 
-@WebServlet(name = "LoginServlet", urlPatterns = "/login")
+@WebServlet(name = "LoginServlet", urlPatterns = WEB_LOGIN)
 public class LoginServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(LoginServlet.class);
 
     public static final String LOGGED_IN_USER = "logged_in_user";
+    public static final String EXTRA_MESSAGE = "extra_message";
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = StringUtils.trimToEmpty(req.getParameter("extra_message"));
+        switch (action) {
+            case "successful_registration" -> req.setAttribute(EXTRA_MESSAGE, "Вы успешно зарегистрированы");
+            case "no_authorized" -> req.setAttribute(EXTRA_MESSAGE, "Данная страница для авторизованных пользователей.");
+        }
+
+        req.getRequestDispatcher(LOGIN_JSP).forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,10 +49,9 @@ public class LoginServlet extends HttpServlet {
 
         if (StringUtils.isAnyBlank(email, password)) {
             writer.println("Please, Enter login and password");
-           // session.setAttribute(email, "logout");
             resp.sendRedirect(LOGIN_JSP);
         } else {
-            Person person = PersonUtil.getPersonList().stream()
+            Person person = PersonService.getPersonList().stream()
                     .filter(p -> p.getEmail().equalsIgnoreCase(email))
                     .filter(p -> p.getPassword().equals(password))
                     .findFirst().orElse(null);
@@ -50,12 +61,13 @@ public class LoginServlet extends HttpServlet {
                 LOGGER.info("User '{}' logged in into app", person.getEmail());
                 //TODO forward to main page
                 session.setAttribute(LOGGED_IN_USER, person);
-                resp.sendRedirect("/web/jsp/index_logged.jsp");
+                session.setAttribute("userName", person.getFirstName());
+                session.setAttribute("email", person.getEmail());
+                req.getRequestDispatcher(INDEX_JSP)
+                        .forward(req, resp);
             }
         }
 
-
-        //session.invalidate();
         session.setMaxInactiveInterval(24 * 60 * 60);
 
     }
