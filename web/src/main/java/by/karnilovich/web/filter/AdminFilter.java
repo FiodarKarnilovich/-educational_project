@@ -1,7 +1,6 @@
-package by.karnilovich.web.servlet;
+package by.karnilovich.web.filter;
 
 import by.karnilovich.entity.person.Person;
-import by.karnilovich.service.person.PersonService;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,12 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
-import java.util.Objects;
-
-import static by.karnilovich.web.servlet.AuthFilter.LOGIN_JSP;
-import static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER;
+import static by.karnilovich.web.util.WebAttributes.LOGGED_IN_USER;
 
 @WebFilter(filterName = "AdminFilter", urlPatterns = "/admin")
 public class AdminFilter implements Filter {

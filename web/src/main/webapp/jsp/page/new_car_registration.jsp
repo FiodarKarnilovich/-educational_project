@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>--%>
-<jsp:include page="_header.jsp"/>
+<jsp:include page="../_header.jsp"/>
 
 <h1> Введите данные новой машины </h1>
 
@@ -51,4 +51,4 @@
     <button type="submit" class="btn btn-primary">Зарегистрировать</button>
 </form>
 
-<jsp:include page="_footer.jsp"/>
+<jsp:include page="../_footer.jsp"/>

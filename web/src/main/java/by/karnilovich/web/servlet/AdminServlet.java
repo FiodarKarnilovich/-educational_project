@@ -7,10 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
-
-import static by.karnilovich.web.servlet.AuthFilter.*;
+import static by.karnilovich.web.util.WebAttributes.ADMIN_JSP;
+import static by.karnilovich.web.util.WebAttributes.WEB_ADMIN;
 
 @WebServlet(name = "AdminServlet", urlPatterns = WEB_ADMIN)
 public class AdminServlet extends HttpServlet {

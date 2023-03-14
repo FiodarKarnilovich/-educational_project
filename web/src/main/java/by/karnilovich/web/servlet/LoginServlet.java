@@ -15,15 +15,15 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static by.karnilovich.web.servlet.AuthFilter.*;
+import static by.karnilovich.web.util.WebAttributes.*;
 
 @WebServlet(name = "LoginServlet", urlPatterns = WEB_LOGIN)
 public class LoginServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(LoginServlet.class);
 
-    public static final String LOGGED_IN_USER = "logged_in_user";
-    public static final String EXTRA_MESSAGE = "extra_message";
+//    public static final String LOGGED_IN_USER = "logged_in_user";
+//    public static final String EXTRA_MESSAGE = "extra_message";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

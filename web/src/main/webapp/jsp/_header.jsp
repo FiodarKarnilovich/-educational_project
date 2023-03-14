@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER" %>
-<%--<jsp:directive.page contentType="text/html; charset=UTF-8" />--%>
+<%@ page import="static by.karnilovich.web.util.WebAttributes.LOGGED_IN_USER" %>
+<%@ page import="static by.karnilovich.web.util.WebAttributes.WEB_VIEW_USER_DETAILS" %>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 
         <li class="nav-item">
             <a class="nav-link" href= <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
-                    request.getContextPath() + "/viewuserdetails" : "" %>>
+                    request.getContextPath() +  WEB_VIEW_USER_DETAILS : "" %>>
                 <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
                         "Profile" : "" %></a>
         </li>

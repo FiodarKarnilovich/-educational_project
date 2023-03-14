@@ -1,5 +1,5 @@
+<%@ page import="static by.karnilovich.web.util.WebAttributes.EXTRA_MESSAGE" %>
 
-<%@ page import="static by.karnilovich.web.servlet.LoginServlet.EXTRA_MESSAGE" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/jsp/_header.jsp"/>
 

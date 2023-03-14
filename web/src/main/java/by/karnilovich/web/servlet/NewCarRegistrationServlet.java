@@ -1,9 +1,7 @@
 package by.karnilovich.web.servlet;
 
 import by.karnilovich.entity.auto.Auto;
-import by.karnilovich.entity.person.Person;
 import by.karnilovich.service.auto.AutoService;
-import by.karnilovich.service.person.PersonService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +12,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-import static by.karnilovich.web.servlet.AuthFilter.*;
+import static by.karnilovich.web.util.WebAttributes.SHOW_LIST_CARS_JSP;
+import static by.karnilovich.web.util.WebAttributes.WEB_CAR_REGISTRATION;
 
 @WebServlet(name = "NewCarRegistrationServlet", urlPatterns = WEB_CAR_REGISTRATION)
 public class NewCarRegistrationServlet extends HttpServlet {

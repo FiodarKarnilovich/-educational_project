@@ -1,4 +1,5 @@
-<%@ page import="static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER" %>
+<%@ page import="static by.karnilovich.web.util.WebAttributes.LOGGED_IN_USER" %>
+<%@ page import="static by.karnilovich.web.util.WebAttributes.WEB_VIEW_USER_DETAILS" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>--%>
@@ -30,7 +31,7 @@
         <li class="nav-item">
 
             <a class="nav-link" href= <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
-                    request.getContextPath() + "/viewuserdetails" : "" %>>
+                    request.getContextPath() + WEB_VIEW_USER_DETAILS : "" %>>
                 <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
                         "Profile" : "" %></a>
 

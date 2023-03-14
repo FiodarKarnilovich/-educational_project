@@ -7,11 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 
-import static by.karnilovich.web.servlet.AuthFilter.*;
-import static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER;
+import static by.karnilovich.web.util.WebAttributes.INDEX_JSP;
+import static by.karnilovich.web.util.WebAttributes.LOGGED_IN_USER;
 
 @WebServlet(name = "IndexServlet", urlPatterns = "")
 public class IndexServlet extends HttpServlet {
