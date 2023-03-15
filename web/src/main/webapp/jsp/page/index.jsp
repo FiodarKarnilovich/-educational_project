@@ -1,5 +1,7 @@
 <%@ page import="static by.karnilovich.web.util.WebAttributes.LOGGED_IN_USER" %>
 <%@ page import="static by.karnilovich.web.util.WebAttributes.WEB_VIEW_USER_DETAILS" %>
+<%@ page import="by.karnilovich.entity.person.Person" %>
+<%@ page import="static by.karnilovich.web.util.WebAttributes.*" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>--%>
@@ -21,10 +23,18 @@
         background-position: center center;">
 
 <header>
+    <%
+        Person person = (Person) request.getSession().getAttribute(LOGGED_IN_USER);
+    %>
     <ul class="nav justify-content-end">
 
         <li class="nav-item">
-            <a class="nav-link">hi, <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
+            <a class="nav-link"    href= <%= person != null ?
+                (person.getRole().equals("ROLE_ADMIN") ?
+                    request.getContextPath() +  WEB_ADMIN : request.getContextPath()
+            ) :  request.getContextPath()
+            %>
+            >hi, <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
                     request.getSession().getAttribute("userName") : "guest" %> </a>
         </li>
 

@@ -2,6 +2,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="static by.karnilovich.web.util.WebAttributes.LOGGED_IN_USER" %>
 <%@ page import="static by.karnilovich.web.util.WebAttributes.WEB_VIEW_USER_DETAILS" %>
+<%@ page import="static by.karnilovich.web.util.WebAttributes.*" %>
+<%@ page import="by.karnilovich.entity.person.Person" %>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,11 +14,17 @@
 </head>
 <body>
 <header>
+    <% Person person = (Person) request.getSession().getAttribute(LOGGED_IN_USER);%>
     <ul class="nav justify-content-end">
 
         <li class="nav-item">
-            <a class="nav-link">hi, <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
-            request.getSession().getAttribute("userName") : "guest" %> </a>
+            <a class="nav-link"    href= <%= person != null ?
+                (person.getRole().equals("ROLE_ADMIN") ?
+                    request.getContextPath() +  WEB_ADMIN : request.getContextPath()
+            ) :  request.getContextPath()
+            %>
+            >hi, <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
+                    request.getSession().getAttribute("userName") : "guest" %> </a>
         </li>
 
         <li class="nav-item">
