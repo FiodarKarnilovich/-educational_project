@@ -9,7 +9,6 @@ public interface WebAttributes {
     public static final String WEB_VIEW_USER_DETAILS = "/viewuserdetails";
     public static final String WEB_ADMIN = "/admin";
     public static final String WEB_CAR_REGISTRATION = "/newcarregistration";
-    public static final String CAR_REG = "/carreg";
     public static final String WEB_LOGIN = "/login";
     public static final String WEB_CONTACTS = "/contacts";
     public static final String WEB_USER_REGISTRATION = "/registration";

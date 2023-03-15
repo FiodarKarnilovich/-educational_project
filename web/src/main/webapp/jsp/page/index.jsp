@@ -51,10 +51,10 @@
             <a class="nav-link active" aria-current="page" href="<%= request.getContextPath() %>">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<%= request.getContextPath() %>/contacts">Contacts</a>
+            <a class="nav-link" href="<%= request.getContextPath() + WEB_CONTACTS%>">Contacts</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<%= request.getContextPath() %>/showlistcars">Rental Cars</a>
+            <a class="nav-link" href="<%= request.getContextPath() + WEB_SHOW_LIST_CARS%>">Rental Cars</a>
         </li>
 
 
@@ -62,7 +62,7 @@
         <li class="nav-item">
 
             <a class="nav-link" href= <%= request.getSession().getAttribute(LOGGED_IN_USER) != null ?
-                    request.getContextPath() + "/logout" : request.getContextPath() + "/login" %>>
+                    request.getContextPath() + WEB_LOGOUT : request.getContextPath() + WEB_LOGIN %>>
                 <%=request.getSession().getAttribute(LOGGED_IN_USER) != null ?
                         "Logout" : "Login" %></a>
 

@@ -12,14 +12,19 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-import static by.karnilovich.web.util.WebAttributes.SHOW_LIST_CARS_JSP;
-import static by.karnilovich.web.util.WebAttributes.WEB_CAR_REGISTRATION;
+import static by.karnilovich.web.util.WebAttributes.*;
 
 @WebServlet(name = "NewCarRegistrationServlet", urlPatterns = WEB_CAR_REGISTRATION)
 public class NewCarRegistrationServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(NewCarRegistrationServlet.class);
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        LOGGER.debug(" -> new_car_registration.jsp");
+        req.getRequestDispatcher(CAR_REGISTRATION_JSP).forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
