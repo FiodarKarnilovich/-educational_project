@@ -40,7 +40,8 @@ public class AuthFilter implements Filter {
             String requestURL = requestURI.replaceFirst(req.getContextPath(), "");
 
             if (requestURL.startsWith("/jsp/")) {
-                res.sendError(404);
+                req.getRequestDispatcher(ERROR_404_JSP)
+                        .forward(servletRequest, servletResponse);
                 return;
             }
 

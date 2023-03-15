@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.IOException;
+
+import static by.karnilovich.web.util.WebAttributes.ERROR_403_JSP;
 import static by.karnilovich.web.util.WebAttributes.LOGGED_IN_USER;
 
 @WebFilter(filterName = "AdminFilter", urlPatterns = "/admin")
@@ -34,9 +36,9 @@ public class AdminFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             LOGGER.debug("User is not authorized. Redirect to login page " + requestURI);
-            res.sendError(403);
-//            req.getRequestDispatcher(LOGIN_JSP)
-//                    .forward(servletRequest, servletResponse);
+//            res.sendError(403);
+              req.getRequestDispatcher(ERROR_403_JSP)
+                    .forward(servletRequest, servletResponse);
         }
     }
 }
