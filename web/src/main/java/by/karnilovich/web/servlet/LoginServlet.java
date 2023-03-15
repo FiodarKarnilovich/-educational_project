@@ -29,6 +29,7 @@ public class LoginServlet extends HttpServlet {
             case "successful_registration" -> req.setAttribute(EXTRA_MESSAGE, "Вы успешно зарегистрированы");
             case "no_authorized" -> req.setAttribute(EXTRA_MESSAGE, "Данная страница для авторизованных пользователей.");
             case "error_login" -> req.setAttribute(EXTRA_MESSAGE, "Ошибка при вводе данных аунтификации.");
+            case "person_not_found" -> req.setAttribute(EXTRA_MESSAGE, "Пользователь не найден.");
         }
 
         req.getRequestDispatcher(LOGIN_JSP).forward(req, resp);
@@ -55,7 +56,7 @@ public class LoginServlet extends HttpServlet {
                     .filter(p -> p.getPassword().equals(password))
                     .findFirst().orElse(null);
             if (person == null) {
-                writer.println("Invalid credentials. Please, Enter login and password again.");
+                resp.sendRedirect(req.getContextPath() + WEB_LOGIN + "?extra_message=person_not_found");
             } else {
                 LOGGER.info("User '{}' logged in into app", person.getEmail());
                 //TODO forward to main page

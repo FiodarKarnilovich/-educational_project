@@ -14,8 +14,6 @@ public interface WebAttributes {
     public static final String WEB_CONTACTS = "/contacts";
     public static final String WEB_USER_REGISTRATION = "/registration";
     public static final String WEB_SHOW_LIST_CARS = "/showlistcars";
-    public static final String WEB_ERROR_403 = "/error403";
-    public static final String WEB_ERROR_404 = "/error404";
 
     //  jsp urls
 
