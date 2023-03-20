@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.List;
 
 import static by.karnilovich.web.util.WebAttributes.VIEW_USER_DETAILS_JSP;
 import static by.karnilovich.web.util.WebAttributes.WEB_VIEW_USER_DETAILS;
@@ -26,6 +27,8 @@ public class ViewUserDetailsServlet extends HttpServlet {
 
         LOGGER.debug(" -> view_user_details.jsp");
         String email = (String)req.getSession().getAttribute("email");
+        List<Person> persons = PersonService.getPersonList();
+        req.setAttribute("persons", persons);
         Person person = PersonService.findByEmail(email);
         req.setAttribute("person", person);
         req.getRequestDispatcher(VIEW_USER_DETAILS_JSP).forward(req, resp);

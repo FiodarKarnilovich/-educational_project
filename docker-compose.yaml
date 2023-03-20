@@ -1,0 +1,39 @@
+networks:
+  default:
+    name: rentalcar-network
+
+volumes:
+  rentalcar-m2-volume:
+
+services:
+  maven-build:
+    image: maven:3.9.0-eclipse-temurin-17
+    volumes:
+      - .:/usr/src/build
+      - rentalcar-m2-volume:/root/.m2
+    working_dir: /usr/src/build
+    command: mvn clean install
+
+  db-mysql:
+    image: mysql:5.7.41
+    environment:
+      MYSQL_DATABASE: db_mysql
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - "3310:3306"
+    volumes:
+      - ./datadir:/var/lib/mysql
+    networks:
+      default:
+        aliases:
+          - rentalcar-mysql
+
+  rentalcar:
+    container_name: rentalcar
+    build:
+      context: web
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./logs:/usr/local/tomcat/logs

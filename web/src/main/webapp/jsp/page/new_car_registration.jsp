@@ -5,7 +5,7 @@
 
 <h1> Введите данные новой машины </h1>
 
-<form style="width: 50% ; margin-left: 10%" method="post" action="<%= request.getContextPath() + WEB_CAR_REGISTRATION%> " enctype="multipart/form-data">
+<form style="width: 30% ; margin-left: 10%" method="post" action="<%= request.getContextPath() + WEB_CAR_REGISTRATION%> " enctype="multipart/form-data">
 <%--    <div class="mb-3">--%>
 <%--        <label for="autoPicture" class="form-label">Фото машины</label>--%>
 <%--        <input type="file" name="autoPicture" class="form-control" id="autoPicture">--%>
