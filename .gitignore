@@ -4,3 +4,5 @@ database/target
 model/target
 services/target
 
+/logs
+/datadir
