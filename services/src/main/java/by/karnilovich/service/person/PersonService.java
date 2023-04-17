@@ -7,6 +7,7 @@ import java.util.List;
 
 public class PersonService {
 
+    //TODO: перенести в базу данных
     private static List<Person> personList = new ArrayList<>(){
         {
             add(new Person("ADMIN", "ADMIN", "admin@admin.com","admin", "16-03-1979", "375291000000", "ROLE_ADMIN"));
@@ -14,6 +15,7 @@ public class PersonService {
 
         }
     };
+
 
     public static List<Person> getPersonList() {
         return personList;

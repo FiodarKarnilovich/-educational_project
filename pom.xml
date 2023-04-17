@@ -18,13 +18,15 @@
   <name>parent</name>
 <!--  &lt;!&ndash; FIXME change it to the project's website &ndash;&gt;-->
 <!--  <url>http://www.example.com</url>-->
-
+<!--https://docs.google.com/presentation/d/1PPzqigSAvYNa-KB6WdF1jAfREXSgi9Fb/edit?usp=share_link&ouid=102698292546431406542&rtpof=true&sd=true-->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-
+    <liquibase.version>4.20.0</liquibase.version>
+    <hikaricp.version>5.0.1</hikaricp.version>
     <log4j.version>2.20.0</log4j.version>
+    <mysql.version>8.0.32</mysql.version>
   </properties>
 
   <dependencyManagement>
@@ -43,6 +45,30 @@
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-api</artifactId>
         <version>${log4j.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-core</artifactId>
+        <version>${liquibase.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
+        <version>6.0.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+        <version>${mysql.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.zaxxer</groupId>
+        <artifactId>HikariCP</artifactId>
+        <version>${hikaricp.version}</version>
       </dependency>
 
     </dependencies>

@@ -7,7 +7,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import static by.karnilovich.web.util.WebAttributes.INDEX_JSP;
 import static by.karnilovich.web.util.WebAttributes.LOGGED_IN_USER;
@@ -24,5 +31,15 @@ public class IndexServlet extends HttpServlet {
               "user logged - true" : "user logged - false");
 
        req.getRequestDispatcher(INDEX_JSP).forward(req, resp);
-   }
+
+        Context ctx = null;
+        try {
+            ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/MyLocalDB");
+            Connection connection = ds.getConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }
