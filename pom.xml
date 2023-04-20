@@ -27,6 +27,7 @@
     <hikaricp.version>5.0.1</hikaricp.version>
     <log4j.version>2.20.0</log4j.version>
     <mysql.version>8.0.32</mysql.version>
+    <log4j.version>2.20.0</log4j.version>
   </properties>
 
   <dependencyManagement>
@@ -71,6 +72,13 @@
         <version>${hikaricp.version}</version>
       </dependency>
 
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-bom</artifactId>
+        <version>${log4j.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
