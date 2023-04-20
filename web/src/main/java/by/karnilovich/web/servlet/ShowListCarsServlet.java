@@ -10,7 +10,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-import static by.karnilovich.web.servlet.AuthFilter.*;
+import static by.karnilovich.web.util.WebAttributes.SHOW_LIST_CARS_JSP;
+import static by.karnilovich.web.util.WebAttributes.WEB_SHOW_LIST_CARS;
 
 @WebServlet(name = "ShowListCarsServlet", urlPatterns = WEB_SHOW_LIST_CARS)
 public class ShowListCarsServlet extends HttpServlet {

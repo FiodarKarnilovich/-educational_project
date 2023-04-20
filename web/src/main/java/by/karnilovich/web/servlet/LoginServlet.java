@@ -15,15 +15,12 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static by.karnilovich.web.servlet.AuthFilter.*;
+import static by.karnilovich.web.util.WebAttributes.*;
 
 @WebServlet(name = "LoginServlet", urlPatterns = WEB_LOGIN)
 public class LoginServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(LoginServlet.class);
-
-    public static final String LOGGED_IN_USER = "logged_in_user";
-    public static final String EXTRA_MESSAGE = "extra_message";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,6 +28,8 @@ public class LoginServlet extends HttpServlet {
         switch (action) {
             case "successful_registration" -> req.setAttribute(EXTRA_MESSAGE, "Вы успешно зарегистрированы");
             case "no_authorized" -> req.setAttribute(EXTRA_MESSAGE, "Данная страница для авторизованных пользователей.");
+            case "error_login" -> req.setAttribute(EXTRA_MESSAGE, "Ошибка при вводе данных аунтификации.");
+            case "person_not_found" -> req.setAttribute(EXTRA_MESSAGE, "Пользователь не найден.");
         }
 
         req.getRequestDispatcher(LOGIN_JSP).forward(req, resp);
@@ -48,15 +47,16 @@ public class LoginServlet extends HttpServlet {
 
 
         if (StringUtils.isAnyBlank(email, password)) {
-            writer.println("Please, Enter login and password");
-            resp.sendRedirect(LOGIN_JSP);
+            session.setAttribute(EXTRA_MESSAGE, "error_login");
+            resp.sendRedirect(req.getContextPath() + WEB_LOGIN + "?extra_message=error_login");
+
         } else {
             Person person = PersonService.getPersonList().stream()
                     .filter(p -> p.getEmail().equalsIgnoreCase(email))
                     .filter(p -> p.getPassword().equals(password))
                     .findFirst().orElse(null);
             if (person == null) {
-                writer.println("Invalid credentials. Please, Enter login and password again.");
+                resp.sendRedirect(req.getContextPath() + WEB_LOGIN + "?extra_message=person_not_found");
             } else {
                 LOGGER.info("User '{}' logged in into app", person.getEmail());
                 //TODO forward to main page

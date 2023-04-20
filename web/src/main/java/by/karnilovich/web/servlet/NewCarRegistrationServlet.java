@@ -1,9 +1,7 @@
 package by.karnilovich.web.servlet;
 
 import by.karnilovich.entity.auto.Auto;
-import by.karnilovich.entity.person.Person;
 import by.karnilovich.service.auto.AutoService;
-import by.karnilovich.service.person.PersonService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,13 +12,19 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-import static by.karnilovich.web.servlet.AuthFilter.*;
+import static by.karnilovich.web.util.WebAttributes.*;
 
 @WebServlet(name = "NewCarRegistrationServlet", urlPatterns = WEB_CAR_REGISTRATION)
 public class NewCarRegistrationServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(NewCarRegistrationServlet.class);
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        LOGGER.debug(" -> new_car_registration.jsp");
+        req.getRequestDispatcher(CAR_REGISTRATION_JSP).forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

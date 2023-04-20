@@ -1,10 +1,11 @@
+<%@ page import="static by.karnilovich.web.util.WebAttributes.WEB_CAR_REGISTRATION" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>--%>
-<jsp:include page="_header.jsp"/>
+<jsp:include page="../_header.jsp"/>
 
 <h1> Введите данные новой машины </h1>
 
-<form style="width: 50% ; margin-left: 10%" method="post" action="<%= request.getContextPath() %>/newcarregistration" enctype="multipart/form-data">
+<form style="width: 30% ; margin-left: 10%" method="post" action="<%= request.getContextPath() + WEB_CAR_REGISTRATION%> " enctype="multipart/form-data">
 <%--    <div class="mb-3">--%>
 <%--        <label for="autoPicture" class="form-label">Фото машины</label>--%>
 <%--        <input type="file" name="autoPicture" class="form-control" id="autoPicture">--%>
@@ -51,4 +52,4 @@
     <button type="submit" class="btn btn-primary">Зарегистрировать</button>
 </form>
 
-<jsp:include page="_footer.jsp"/>
+<jsp:include page="../_footer.jsp"/>

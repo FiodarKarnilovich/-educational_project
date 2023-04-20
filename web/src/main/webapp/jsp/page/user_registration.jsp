@@ -1,7 +1,8 @@
+<%@ page import="static by.karnilovich.web.util.WebAttributes.WEB_USER_REGISTRATION" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/jsp/_header.jsp"/>
 
-<form style="width: 50% ; margin-left: 10%" method="post" action="<%= request.getContextPath() %>/registration">
+<form style="width: 50% ; margin-left: 10%" method="post" action="<%= request.getContextPath()  + WEB_USER_REGISTRATION%>">
     <h2>Регистрация нового пользователя</h2>
 
     <div class="row mb-4">

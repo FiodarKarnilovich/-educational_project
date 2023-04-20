@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-import static by.karnilovich.web.servlet.AuthFilter.*;
+import static by.karnilovich.web.util.WebAttributes.*;
 
 
 @WebServlet(name = "UserRegistrationServlet", urlPatterns = WEB_USER_REGISTRATION)

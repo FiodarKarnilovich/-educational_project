@@ -1,4 +1,4 @@
-package by.karnilovich.web.servlet;
+package by.karnilovich.web.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
@@ -7,40 +7,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-
-import static by.karnilovich.web.servlet.LoginServlet.EXTRA_MESSAGE;
-import static by.karnilovich.web.servlet.LoginServlet.LOGGED_IN_USER;
+import static by.karnilovich.web.util.WebAttributes.*;
 
 @WebFilter(filterName = "AuthFilter", urlPatterns = "/*")
 public class AuthFilter implements Filter {
 
     private static final Logger LOGGER = LogManager.getLogger(AuthFilter.class);
 
-    public static final String INDEX_MAIN = "/";
-    public static final String INDEX_JSP = "/jsp/index.jsp";
-    public static final String CONTACTS_JSP = "/jsp/contacts.jsp";
-    public static final String SHOW_LIST_CARS_JSP = "/jsp/show_list_cars.jsp";
-    public static final String LOGIN_JSP = "/jsp/login.jsp";
-    public static final String USER_REGISTRATION_JSP = "/jsp/user_registration.jsp";
-    public static final String WEB_LOGIN = "/login";
-    public static final String WEB_CONTACTS = "/contacts";
-    public static final String WEB_SHOW_LIST_CARS = "/showlistcars";
-    public static final String WEB_USER_REGISTRATION = "/registration";
-//    public static final String USER_REG = "/userreg";
-
-
-    public static final String WEB_LOGOUT = "/logout";
-    public static final String VIEW_USER_DETAILS_JSP = "/jsp/view_user_details.jsp";
-    public static final String WEB_VIEW_USER_DETAILS = "/viewuserdetails";
-    public static final String WEB_ADMIN = "/admin";
-    public static final String ADMIN_JSP = "/jsp/admin.jsp";
-    public static final String CAR_REG = "/carreg";
-    public static final String CAR_REGISTRATION_JSP = "/jsp/new_car_registration.jsp";
-    public static final String WEB_CAR_REGISTRATION = "/newcarregistration";
 
     public static final List<String> NO_AUTH_URLS  = List.of(
             INDEX_MAIN, WEB_SHOW_LIST_CARS, WEB_LOGIN, WEB_CONTACTS,
@@ -64,7 +40,8 @@ public class AuthFilter implements Filter {
             String requestURL = requestURI.replaceFirst(req.getContextPath(), "");
 
             if (requestURL.startsWith("/jsp/")) {
-                res.sendError(404);
+                req.getRequestDispatcher(ERROR_404_JSP)
+                        .forward(servletRequest, servletResponse);
                 return;
             }
 

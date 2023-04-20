@@ -1,7 +1,6 @@
 package by.karnilovich.service.auto;
 
 import by.karnilovich.entity.auto.Auto;
-import by.karnilovich.entity.person.Person;
 
 import java.util.ArrayList;
 import java.util.List;
