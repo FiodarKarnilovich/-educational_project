@@ -25,6 +25,14 @@
     <listener-class>liquibase.integration.servlet.LiquibaseJakartaServletListener</listener-class>
   </listener>
 
+  <context-param>
+    <param-name>log4jConfiguration</param-name>
+    <param-value>log4j2.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.apache.logging.log4j.web.Log4jServletContainerInitializer</listener-class>
+  </listener>
+
   <filter-mapping>
     <filter-name>AuthFilter</filter-name>
     <url-pattern>/*</url-pattern>

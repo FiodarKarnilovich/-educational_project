@@ -31,15 +31,5 @@ public class IndexServlet extends HttpServlet {
               "user logged - true" : "user logged - false");
 
        req.getRequestDispatcher(INDEX_JSP).forward(req, resp);
-
-        Context ctx = null;
-        try {
-            ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/MyLocalDB");
-            Connection connection = ds.getConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 }
