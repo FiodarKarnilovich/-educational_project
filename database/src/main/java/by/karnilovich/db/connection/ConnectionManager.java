@@ -29,7 +29,7 @@ public class ConnectionManager {
                 // firstly try to use JNDI resource
                 try {
                     InitialContext initialContext = new InitialContext();
-                    dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/javamacDB");
+                    dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/rc_DB_link");
                 } catch (Exception e) {
                     LOGGER.error(e);
                 }
