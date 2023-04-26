@@ -15,5 +15,5 @@ public interface PersonDao {
 
     void update(Person person) throws SQLException;
 
-    int delete(Integer id) throws SQLException;
+    void delete(Integer id) throws SQLException;
 }

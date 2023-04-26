@@ -74,7 +74,12 @@ public class PersonDaoImpl implements PersonDao {
     }
 
     @Override
-    public int delete(Integer id) throws SQLException {
-        return 0;
+    public void delete(Integer id) throws SQLException {
+        try (Connection connection = ConnectionManager.getConnection();
+             Statement statement = connection.createStatement()) {
+
+            statement.executeQuery("DELETE FROM person WHERE id = id");
+
+        }
     }
 }
