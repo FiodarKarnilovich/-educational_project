@@ -3,6 +3,7 @@ package by.karnilovich.web.servlet;
 import by.karnilovich.entity.person.Person;
 import by.karnilovich.service.person.PersonService;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.UnavailableException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,6 +12,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 
 import static by.karnilovich.web.util.WebAttributes.*;
 
@@ -18,6 +23,7 @@ import static by.karnilovich.web.util.WebAttributes.*;
 @WebServlet(name = "UserRegistrationServlet", urlPatterns = WEB_USER_REGISTRATION)
 public class UserRegistrationServlet extends HttpServlet {
 
+    private PersonService personService = new PersonService();
     private static final Logger LOGGER = LogManager.getLogger(UserRegistrationServlet.class);
 
     @Override
@@ -38,8 +44,17 @@ public class UserRegistrationServlet extends HttpServlet {
         final String birthDay = req.getParameter("birthDay");
         final String phoneNumber = req.getParameter("phoneNumber");
 
-        Person person = new Person(firstName, lastName, email, password, birthDay, phoneNumber, "ROLE_USER");
-        PersonService.addPersonToList(person);
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        final LocalDate bDay = LocalDate.from(formatter.parse(birthDay));
+        Person person = new Person(3, firstName, lastName, email, password, bDay, phoneNumber, "ROLE_USER");
+
+        // fixme
+        try {
+            personService.addPersonToList(person);
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new UnavailableException(e.getLocalizedMessage());
+        }
 
         LOGGER.info("User '{}' added in app", person.getEmail());
         resp.sendRedirect(req.getContextPath() + WEB_LOGIN + "?extra_message=successful_registration");

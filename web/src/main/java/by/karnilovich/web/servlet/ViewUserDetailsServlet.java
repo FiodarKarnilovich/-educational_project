@@ -3,6 +3,7 @@ package by.karnilovich.web.servlet;
 import by.karnilovich.entity.person.Person;
 import by.karnilovich.service.person.PersonService;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.UnavailableException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,18 +22,22 @@ public class ViewUserDetailsServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(ViewUserDetailsServlet.class);
 
+    private PersonService personService = new PersonService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         LOGGER.debug(" -> view_user_details.jsp");
-        String email = (String)req.getSession().getAttribute("email");
-        List<Person> persons = PersonService.getPersonList();
-        req.setAttribute("persons", persons);
-        Person person = PersonService.findByEmail(email);
-        req.setAttribute("person", person);
-        req.getRequestDispatcher(VIEW_USER_DETAILS_JSP).forward(req, resp);
-
+        try {
+            String email = (String)req.getSession().getAttribute("email");
+            List<Person> persons = personService.getPersonList();
+            req.setAttribute("persons", persons);
+            Person person = personService.findByEmail(email);
+            req.setAttribute("person", person);
+            req.getRequestDispatcher(VIEW_USER_DETAILS_JSP).forward(req, resp);
+        } catch (Exception e) {
+            LOGGER.error(e);
+            throw new UnavailableException(e.getLocalizedMessage());
+        }
     }
 
     @Override

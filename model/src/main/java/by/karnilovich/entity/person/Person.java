@@ -1,12 +1,15 @@
 package by.karnilovich.entity.person;
 
+import java.time.LocalDate;
+
 public class Person {
 
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-    private String birthDay;
+    private LocalDate birthDay;
     private String phoneNumber;
     private String role;
 
@@ -19,7 +22,8 @@ public class Person {
     }
 
 
-    public Person(String firstName, String lastName, String email, String password, String birthDay, String phoneNumber, String role) {
+    public Person(int id, String firstName, String lastName, String email, String password, LocalDate birthDay, String phoneNumber, String role) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -27,6 +31,14 @@ public class Person {
         this.birthDay = birthDay;
         this.phoneNumber = phoneNumber;
         this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -61,11 +73,11 @@ public class Person {
         this.password = password;
     }
 
-    public String getBirthDay() {
+    public LocalDate getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(String birthDay) {
+    public void setBirthDay(LocalDate birthDay) {
         this.birthDay = birthDay;
     }
 

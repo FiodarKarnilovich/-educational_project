@@ -3,6 +3,7 @@ package by.karnilovich.web.servlet;
 import by.karnilovich.service.person.PersonService;
 import by.karnilovich.entity.person.Person;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.UnavailableException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ import static by.karnilovich.web.util.WebAttributes.*;
 public class LoginServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(LoginServlet.class);
+
+    private PersonService personService = new PersonService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,27 +48,33 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
 
-
         if (StringUtils.isAnyBlank(email, password)) {
             session.setAttribute(EXTRA_MESSAGE, "error_login");
             resp.sendRedirect(req.getContextPath() + WEB_LOGIN + "?extra_message=error_login");
 
         } else {
-            Person person = PersonService.getPersonList().stream()
-                    .filter(p -> p.getEmail().equalsIgnoreCase(email))
-                    .filter(p -> p.getPassword().equals(password))
-                    .findFirst().orElse(null);
-            if (person == null) {
-                resp.sendRedirect(req.getContextPath() + WEB_LOGIN + "?extra_message=person_not_found");
-            } else {
-                LOGGER.info("User '{}' logged in into app", person.getEmail());
-                //TODO forward to main page
-                session.setAttribute(LOGGED_IN_USER, person);
-                session.setAttribute("userName", person.getFirstName());
-                session.setAttribute("email", person.getEmail());
-                req.getRequestDispatcher(INDEX_JSP)
-                        .forward(req, resp);
+            try {
+                Person person = personService.getPersonList().stream()
+                        .filter(p -> p.getEmail().equalsIgnoreCase(email))
+                        .filter(p -> p.getPassword().equals(password))
+                        .findFirst().orElse(null);
+
+                if (person == null) {
+                    resp.sendRedirect(req.getContextPath() + WEB_LOGIN + "?extra_message=person_not_found");
+                } else {
+                    LOGGER.info("User '{}' logged in into app", person.getEmail());
+                    //TODO forward to main page
+                    session.setAttribute(LOGGED_IN_USER, person);
+                    session.setAttribute("userName", person.getFirstName());
+                    session.setAttribute("email", person.getEmail());
+                    req.getRequestDispatcher(INDEX_JSP)
+                            .forward(req, resp);
+                }
+            } catch (Exception e) {
+                LOGGER.error(e.getMessage(), e);
+                throw new UnavailableException(e.getLocalizedMessage());
             }
+
         }
 
         session.setMaxInactiveInterval(24 * 60 * 60);

@@ -8,12 +8,16 @@ CREATE TABLE IF NOT EXISTS `rentalcar_db`.`userRole` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (`id`),
     `roleName` VARCHAR(50) NOT NULL)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8;
 
 -- changeset Fiodar Karnilovich:3
 CREATE TABLE IF NOT EXISTS `rentalcar_db`.`autoBrand` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (`id`),
     `brandName` VARCHAR(50) NOT NULL)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8;
 
 -- changeset Fiodar Karnilovich:4
 CREATE TABLE IF NOT EXISTS `rentalcar_db`.`autoModel` (
@@ -26,6 +30,8 @@ CREATE TABLE IF NOT EXISTS `rentalcar_db`.`autoModel` (
     REFERENCES `rentalcar_db`.`autoBrand` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8;
 
 -- changeset Fiodar Karnilovich:5
 CREATE TABLE IF NOT EXISTS `rentalcar_db`.`auto` (
@@ -42,6 +48,8 @@ CREATE TABLE IF NOT EXISTS `rentalcar_db`.`auto` (
     `transmissionAuto` VARCHAR(50) NOT NULL,
     `yearAuto` INT(11) NOT NULL,
     `priceAuto` DECIMAL(11,2) NOT NULL)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8;
 
 
 -- changeset Fiodar Karnilovich:6
@@ -54,8 +62,9 @@ CREATE TABLE IF NOT EXISTS `rentalcar_db`.`autoPicture` (
     FOREIGN KEY (`auto_id`)
     REFERENCES `rentalcar_db`.`auto` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-)
+    ON UPDATE NO ACTION)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8;
 
 -- changeset Fiodar Karnilovich:7
 CREATE TABLE IF NOT EXISTS `rentalcar_db`.`person` (
@@ -73,6 +82,8 @@ CREATE TABLE IF NOT EXISTS `rentalcar_db`.`person` (
     REFERENCES `rentalcar_db`.`userRole` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8;
 
 -- changeset Fiodar Karnilovich:8
 CREATE TABLE IF NOT EXISTS `rentalcar_db`.`carOrder` (
@@ -92,3 +103,9 @@ CREATE TABLE IF NOT EXISTS `rentalcar_db`.`carOrder` (
     ON UPDATE NO ACTION,
     `dateStart`  VARCHAR(50) NOT NULL,
     `dateFinish`  VARCHAR(50) NOT NULL)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8;
+
+-- changeset Fiodar Karnilovich:9
+CREATE UNIQUE INDEX uq_person_email_idx
+    ON `rentalcar_db`.`person` (email);
