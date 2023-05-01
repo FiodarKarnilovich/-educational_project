@@ -2,6 +2,7 @@ package by.karnilovich.entity.auto;
 
 public class Auto {
 
+    private int id;
     private String autoBrand;
     private String autoModel;
     private String colourAuto;
@@ -15,6 +16,14 @@ public class Auto {
 
     public String getAutoBrand() {
         return autoBrand;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setAutoBrand(String autoBrand) {
@@ -55,6 +64,9 @@ public class Auto {
 
     public void setPriceAuto(Double priceAuto) {
         this.priceAuto = priceAuto;
+    }
+
+    public Auto() {
     }
 
     public Auto(String autoBrand, String autoModel, String colourAuto, String transmissionAuto, Integer yearAuto, Double priceAuto) {
