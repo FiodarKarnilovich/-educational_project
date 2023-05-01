@@ -4,10 +4,7 @@ import by.karnilovich.db.connection.ConnectionManager;
 import by.karnilovich.entity.auto.Auto;
 import by.karnilovich.entity.person.Person;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +18,25 @@ public class AutoDaoImpl implements AutoDao{
                     JOIN autoBrand ab ON am.brandName_id = ab.id;
                     """;
 
+    public static final String GET_FROM_AUTO_BY_ID = """
+           SELECT a.*, am.modelName, ab.brandName 
+           FROM auto a
+           JOIN autoModel am ON a.modelName_id = am.id
+           JOIN autoBrand ab ON am.brandName_id = ab.id
+           WHERE a.id =?;
+           """;
     @Override
     public Auto get(Integer id) throws SQLException {
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_FROM_AUTO_BY_ID)) {
+
+            preparedStatement.setInt(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return toAuto(resultSet);
+                }
+            }
+        }
         return null;
     }
 
@@ -34,14 +48,7 @@ public class AutoDaoImpl implements AutoDao{
             List<Auto> autos = new ArrayList<>();
             try (ResultSet resultSet = statement.executeQuery(GET_ALL_FROM_AUTO)) {
                 while (resultSet.next()) {
-                    Auto auto = new Auto();
-                    auto.setId(resultSet.getInt("id"));
-                    auto.setAutoBrand(resultSet.getString("brandName"));
-                    auto.setAutoModel(resultSet.getString("modelName"));
-                    auto.setColourAuto(resultSet.getString("colourAuto"));
-                    auto.setTransmissionAuto(resultSet.getString("transmissionAuto"));
-                    auto.setYearAuto(resultSet.getInt("yearAuto"));
-                    auto.setPriceAuto(resultSet.getDouble("priceAuto"));
+                    Auto auto = toAuto(resultSet);
                     autos.add(auto);
                 }
             }
@@ -62,5 +69,18 @@ public class AutoDaoImpl implements AutoDao{
     @Override
     public void delete(Integer id) throws SQLException {
 
+    }
+
+    private Auto toAuto(ResultSet resultSet) throws SQLException {
+        Auto auto = new Auto();
+        auto.setId(resultSet.getInt("id"));
+        auto.setAutoBrand(resultSet.getString("brandName"));
+        auto.setAutoModel(resultSet.getString("modelName"));
+        auto.setColourAuto(resultSet.getString("colourAuto"));
+        auto.setTransmissionAuto(resultSet.getString("transmissionAuto"));
+        auto.setYearAuto(resultSet.getInt("yearAuto"));
+        auto.setPriceAuto(resultSet.getDouble("priceAuto"));
+
+        return auto;
     }
 }

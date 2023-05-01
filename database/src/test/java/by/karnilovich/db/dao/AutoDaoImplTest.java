@@ -19,7 +19,10 @@ class AutoDaoImplTest {
 
     @Test
     @Order(1)
-    void get() {
+    void get() throws SQLException {
+        Auto auto = autoDao.get(1);
+        assertEquals(1, auto.getId());
+        assertEquals(2022, auto.getYearAuto());
     }
 
     @Order(2)
