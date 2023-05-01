@@ -11,7 +11,7 @@ public interface AutoDao {
 
     List<Auto> getAll() throws SQLException;
 
-    Auto save(Person person) throws SQLException;
+    Auto save(Auto auto) throws SQLException;
 
     void update(Auto auto) throws SQLException;
 

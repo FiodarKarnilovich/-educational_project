@@ -25,6 +25,14 @@ public class AutoDaoImpl implements AutoDao{
            JOIN autoBrand ab ON am.brandName_id = ab.id
            WHERE a.id =?;
            """;
+
+    public static final String INSERT_INTO =
+            """
+                    INSERT INTO auto (modelName_id, colourAuto, transmissionAuto, yearAuto, priceAuto)
+                    VALUES (?,?,?,?,?);
+                    """;
+
+
     @Override
     public Auto get(Integer id) throws SQLException {
         try (Connection connection = ConnectionManager.getConnection();
@@ -57,8 +65,21 @@ public class AutoDaoImpl implements AutoDao{
     }
 
     @Override
-    public Auto save(Person person) throws SQLException {
-        return null;
+    public Auto save(Auto auto) throws SQLException {
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO)) {
+            preparedStatement.setString(1, auto.getAutoModel());
+            preparedStatement.setString(2, auto.getColourAuto());
+            preparedStatement.setString(3, auto.getTransmissionAuto());
+            preparedStatement.setInt(4, auto.getYearAuto());
+            preparedStatement.setDouble(5, auto.getPriceAuto());
+
+            preparedStatement.executeUpdate();
+        }
+        return getAll().stream()
+                .filter(p -> p.getId() == auto.getId())
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
