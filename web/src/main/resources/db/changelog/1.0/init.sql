@@ -43,7 +43,6 @@ CREATE TABLE IF NOT EXISTS `rentalcar_db`.`auto` (
     REFERENCES `rentalcar_db`.`autoModel` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-    `autoModel` VARCHAR(50) NOT NULL,
     `colourAuto` VARCHAR(50) NOT NULL,
     `transmissionAuto` VARCHAR(50) NOT NULL,
     `yearAuto` INT(11) NOT NULL,
@@ -109,3 +108,4 @@ CREATE TABLE IF NOT EXISTS `rentalcar_db`.`carOrder` (
 -- changeset Fiodar Karnilovich:9
 CREATE UNIQUE INDEX uq_person_email_idx
     ON `rentalcar_db`.`person` (email);
+
