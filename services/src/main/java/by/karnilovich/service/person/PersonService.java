@@ -25,6 +25,10 @@ public class PersonService {
         return personDao.getAll();
     }
 
+    public Person getPersonByEmail(String email) throws Exception {
+        return null;
+    }
+
     public List<Person> addPersonToList(Person person) throws SQLException {
         personDao.save(person);
         return personDao.getAll();
