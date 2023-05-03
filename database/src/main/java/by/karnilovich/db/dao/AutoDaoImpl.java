@@ -29,7 +29,7 @@ public class AutoDaoImpl implements AutoDao {
     public static final String INSERT_INTO =
             """
                     INSERT INTO auto (modelName_id, colourAuto, transmissionAuto, yearAuto, priceAuto)
-                    VALUES (?,?,?,?,?);
+//                    VALUES (?,?,?,?,?);
                     """;
     public static final String DELETE_FROM_AUTO_BY_ID = """
             DELETE FROM auto WHERE id =?;

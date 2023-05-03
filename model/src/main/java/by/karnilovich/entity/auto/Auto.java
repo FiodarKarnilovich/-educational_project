@@ -96,6 +96,14 @@ public class Auto {
         this.priceAuto = priceAuto;
     }
 
+    public Auto(String autoModel, String colourAuto, String transmissionAuto, Integer yearAuto, Double priceAuto) {
+        this.autoModel = autoModel;
+        this.colourAuto = colourAuto;
+        this.transmissionAuto = transmissionAuto;
+        this.yearAuto = yearAuto;
+        this.priceAuto = priceAuto;
+    }
+
     @Override
     public String toString() {
         return "auto{" +
