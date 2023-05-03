@@ -3,9 +3,7 @@
 <jsp:include page="/jsp/_header.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%--<c:set value="${person}" var="person"/>--%>
 <c:set var="person" value='${requestScope.person}' />
-<%--<c:set var="person" value='${requestScope["person"]}' />--%>
 
 
 <table class="table">
@@ -22,7 +20,6 @@
     </thead>
     <tbody>
     <tr>
-<%--        <% Person person = (Person) request.getAttribute("person"); %>--%>
 
         <td></td>
         <td><c:out value="${person.firstName}"/></td>
@@ -31,20 +28,6 @@
         <td><c:out value="${person.birthDay}"/></td>
         <td><c:out value="${person.phoneNumber}"/></td>
         <td><c:out value="${person.role}"/></td>
-<%--        <td></td>--%>
-<%--        <td><%= person.getFirstName()%>--%>
-<%--        </td>--%>
-<%--        <td><%= person.getLastName()%>--%>
-<%--        </td>--%>
-<%--        <td><%= person.getEmail()%>--%>
-<%--        </td>--%>
-<%--        <td><%= person.getBirthDay()%>--%>
-<%--        </td>--%>
-<%--        <td><%= person.getPhoneNumber()%>--%>
-<%--        </td>--%>
-<%--        <td><%= person.getRole()%>--%>
-<%--        </td>--%>
-<%--    </tr>--%>
 
     </tbody>
 </table>

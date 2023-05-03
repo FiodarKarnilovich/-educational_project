@@ -1,5 +1,10 @@
 package by.karnilovich.entity.auto;
 
+import by.karnilovich.entity.order.Order;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Auto {
 
     private int id;
@@ -9,6 +14,7 @@ public class Auto {
     private String transmissionAuto;
     private Integer yearAuto;
     private Double priceAuto;
+    private List<Order> orders = new ArrayList<>();
 
     public String getAutoModel() {
         return autoModel;
@@ -64,6 +70,18 @@ public class Auto {
 
     public void setPriceAuto(Double priceAuto) {
         this.priceAuto = priceAuto;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public void addOrder(Order order) {
+        this.orders.add(order);
     }
 
     public Auto() {

@@ -28,9 +28,12 @@ public class AutoDaoImpl implements AutoDao{
 
     public static final String INSERT_INTO =
             """
-                    INSERT INTO auto (modelName_id, colourAuto, transmissionAuto, yearAuto, priceAuto)
-                    VALUES (?,?,?,?,?);
-                    """;
+            INSERT INTO auto (modelName_id, colourAuto, transmissionAuto, yearAuto, priceAuto)
+            VALUES (?,?,?,?,?);
+            """;
+    public static final String DELETE_FROM_AUTO_BY_ID = """
+            DELETE FROM auto WHERE id =?;
+           """;
 
 
     @Override
@@ -89,7 +92,12 @@ public class AutoDaoImpl implements AutoDao{
 
     @Override
     public void delete(Integer id) throws SQLException {
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_AUTO_BY_ID)) {
 
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+        }
     }
 
     private Auto toAuto(ResultSet resultSet) throws SQLException {
