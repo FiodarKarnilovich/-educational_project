@@ -1,3 +1,4 @@
+<%@ page import="static by.karnilovich.web.util.WebAttributes.WEB_CAR_REGISTRATION" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/jsp/_header.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -34,5 +35,9 @@
     </c:forEach>
 <%--    </tbody>--%>
 </table>
+
+<a href="<%= request.getContextPath() + WEB_CAR_REGISTRATION %>">
+    <button class="btn btn-outline-danger">Регистрация авто</button>
+</a>
 
 <jsp:include page="/jsp/_footer.jsp"/>
