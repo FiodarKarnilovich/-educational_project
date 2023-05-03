@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutoDaoImpl implements AutoDao{
+public class AutoDaoImpl implements AutoDao {
 
     public static final String GET_ALL_FROM_AUTO =
             """
@@ -19,22 +19,26 @@ public class AutoDaoImpl implements AutoDao{
                     """;
 
     public static final String GET_FROM_AUTO_BY_ID = """
-           SELECT a.*, am.modelName, ab.brandName 
-           FROM auto a
-           JOIN autoModel am ON a.modelName_id = am.id
-           JOIN autoBrand ab ON am.brandName_id = ab.id
-           WHERE a.id =?;
-           """;
+            SELECT a.*, am.modelName, ab.brandName 
+            FROM auto a
+            JOIN autoModel am ON a.modelName_id = am.id
+            JOIN autoBrand ab ON am.brandName_id = ab.id
+            WHERE a.id =?;
+            """;
 
     public static final String INSERT_INTO =
             """
-            INSERT INTO auto (modelName_id, colourAuto, transmissionAuto, yearAuto, priceAuto)
-            VALUES (?,?,?,?,?);
-            """;
+                    INSERT INTO auto (modelName_id, colourAuto, transmissionAuto, yearAuto, priceAuto)
+                    VALUES (?,?,?,?,?);
+                    """;
     public static final String DELETE_FROM_AUTO_BY_ID = """
             DELETE FROM auto WHERE id =?;
-           """;
-
+            """;
+    public static final String UPDATE_AUTO_BY_ID = """
+            UPDATE auto
+            SET priceAuto =?,
+            WHERE id =?;
+            """;
 
     @Override
     public Auto get(Integer id) throws SQLException {
@@ -87,9 +91,16 @@ public class AutoDaoImpl implements AutoDao{
 
     @Override
     public void update(Auto auto) throws SQLException {
+            try (Connection connection = ConnectionManager.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_AUTO_BY_ID)) {
 
-    }
+                preparedStatement.setDouble(1, auto.getPriceAuto());
+                preparedStatement.setInt(2, auto.getId());
 
+                preparedStatement.executeUpdate();
+            }
+
+        }
     @Override
     public void delete(Integer id) throws SQLException {
         try (Connection connection = ConnectionManager.getConnection();
