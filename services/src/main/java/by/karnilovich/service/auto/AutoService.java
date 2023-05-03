@@ -24,4 +24,8 @@ public class AutoService {
         return autoDao.getAll();
     }
 
+    public void createAutoBrand(String autoBrand) throws SQLException {
+
+    }
+
 }

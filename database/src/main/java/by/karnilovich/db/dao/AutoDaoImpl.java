@@ -2,7 +2,6 @@ package by.karnilovich.db.dao;
 
 import by.karnilovich.db.connection.ConnectionManager;
 import by.karnilovich.entity.auto.Auto;
-import by.karnilovich.entity.person.Person;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,6 +15,11 @@ public class AutoDaoImpl implements AutoDao {
                     FROM auto a
                     JOIN autoModel am ON a.modelName_id = am.id
                     JOIN autoBrand ab ON am.brandName_id = ab.id;
+                    """;
+    public static final String GET_ALL_FROM_AUTO_BRAND =
+            """
+                    SELECT *
+                    FROM autoBrand;
                     """;
 
     public static final String GET_FROM_AUTO_BY_ID = """
@@ -53,6 +57,29 @@ public class AutoDaoImpl implements AutoDao {
             }
         }
         return null;
+    }
+
+    @Override
+    public void createAutoBrandIfNotFound(String autoBrand) throws SQLException {
+        try (Connection connection = ConnectionManager.getConnection();
+             Statement statement = connection.createStatement()) {
+            List<String> autoBrands = new ArrayList<>();
+            try (ResultSet resultSet = statement.executeQuery(GET_ALL_FROM_AUTO_BRAND)) {
+                while (resultSet.next()) {
+                    String brandName = resultSet.getString("brandName");
+                    autoBrands.add(brandName);
+                }
+                 String searchBrand = autoBrands.stream()
+                        .filter(p -> p.equalsIgnoreCase(autoBrand))
+                        .findFirst().orElse(null);
+
+                if (searchBrand == null) {
+                    statement.executeQuery("INSERT INTO autoBrand (brandName) VALUES ('" + autoBrand +"')");
+                }
+            }
+
+        }
+
     }
 
     @Override

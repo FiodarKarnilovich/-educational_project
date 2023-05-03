@@ -15,4 +15,6 @@ public interface AutoDao {
     void update(Auto auto) throws SQLException;
 
     void delete(Integer id) throws SQLException;
+
+    void createAutoBrandIfNotFound(String autoBrand) throws SQLException;
 }
