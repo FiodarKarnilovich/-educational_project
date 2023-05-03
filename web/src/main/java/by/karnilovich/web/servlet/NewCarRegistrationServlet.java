@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import static by.karnilovich.web.util.WebAttributes.*;
 
@@ -37,7 +38,11 @@ public class NewCarRegistrationServlet extends HttpServlet {
         final Double priceAuto = Double.parseDouble(req.getParameter("priceAuto"));
 
         Auto auto = new Auto(autoBrand, autoModel, colourAuto, transmissionAuto, yearAuto, priceAuto);
-        AutoService.addAutoToList(auto);
+        try {
+            AutoService.addAutoToList(auto);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         LOGGER.info("Auto '{}' '{}' added in app", auto.getAutoBrand(), auto.getAutoModel());
         resp.sendRedirect(req.getContextPath() + SHOW_LIST_CARS_JSP);

@@ -1,7 +1,6 @@
 package by.karnilovich.db.dao;
 
 import by.karnilovich.entity.auto.Auto;
-import by.karnilovich.entity.person.Person;
 
 import java.sql.SQLException;
 import java.util.List;

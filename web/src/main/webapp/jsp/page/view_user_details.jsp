@@ -1,4 +1,3 @@
-<%@ page import="by.karnilovich.entity.person.Person" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/jsp/_header.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -21,7 +20,7 @@
     <tbody>
     <tr>
 
-        <td></td>
+        <td><c:out value="${person.id}"/></td>
         <td><c:out value="${person.firstName}"/></td>
         <td><c:out value="${person.lastName}"/></td>
         <td><c:out value="${person.email}"/></td>
