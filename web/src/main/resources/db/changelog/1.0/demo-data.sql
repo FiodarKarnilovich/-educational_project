@@ -40,6 +40,6 @@ VALUES (1, 1, 'black', 'A', 2022, 100.0),
 
 -- changeset Fiodar Karnilovich:6
 INSERT INTO rentalcar_db.carOrder (id, person_id, auto_id, dateStart, dateFinish)
-VALUES (1, 1, 1, 2022-05-06, 2022-05-12),
-       (2, 3, 3, 2022-05-01, 2022-05-09);
+VALUES (1, 1, 1, "2022-05-06", "2022-05-12"),
+       (2, 3, 3, "2022-05-01", "2022-05-09");
 

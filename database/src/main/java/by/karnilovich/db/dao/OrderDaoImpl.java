@@ -15,10 +15,11 @@ public class OrderDaoImpl implements OrderDao{
 
     public static final String GET_ALL_FROM_ORDER =
             """
-                    SELECT o.*, am.modelName, ab.brandName 
+                    SELECT o.*, am.modelName, ab.brandName
                     FROM carOrder o
-                    JOIN autoModel am ON a.modelName_id = am.id
-                    JOIN autoBrand ab ON am.brandName_id = ab.id;
+                             JOIN auto a ON o.auto_id = a.id
+                             JOIN autoModel am on am.id = a.modelName_id
+                             JOIN autoBrand ab ON am.brandName_id = ab.id;
                     """;
 
 
@@ -34,8 +35,8 @@ public class OrderDaoImpl implements OrderDao{
             List<Order> orders = new ArrayList<>();
             try (ResultSet resultSet = statement.executeQuery(GET_ALL_FROM_ORDER)) {
                 while (resultSet.next()) {
-                    Auto auto = toOrder(resultSet);
-                    orderss.add(order);
+                    Order order = toOrder(resultSet);
+                    orders.add(order);
                 }
             }
             return orders;
@@ -55,5 +56,17 @@ public class OrderDaoImpl implements OrderDao{
     @Override
     public void delete(Integer id) throws SQLException {
 
+    }
+
+    private Order toOrder(ResultSet resultSet) throws SQLException {
+        Order order = new Order();
+
+        order.setId(resultSet.getInt("id"));
+        order.setAutoBrand(resultSet.getString("brandName"));
+        order.setAutoModel(resultSet.getString("modelName"));
+        order.setStartDate(resultSet.getDate("dateStart").toLocalDate());
+        order.setFinishDate(resultSet.getDate("dateFinish").toLocalDate());
+
+    return order;
     }
 }
