@@ -7,6 +7,7 @@ import java.time.LocalDate;
 public class Order {
 
     private int id;
+    private int auto_id;
     private String autoBrand;
     private String autoModel;
     private LocalDate startDate;
@@ -18,6 +19,14 @@ public class Order {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getAuto_id() {
+        return auto_id;
+    }
+
+    public void setAuto_id(int auto_id) {
+        this.auto_id = auto_id;
     }
 
     public String getAutoBrand() {
@@ -45,6 +54,7 @@ public class Order {
     }
 
     public LocalDate getFinishDate() {
+
         return finishDate;
     }
 
