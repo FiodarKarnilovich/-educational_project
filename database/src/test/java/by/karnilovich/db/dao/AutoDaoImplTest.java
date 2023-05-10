@@ -43,4 +43,10 @@ class AutoDaoImplTest {
     @Test
     void delete() {
     }
+
+    @Test
+    void createAutoBrandIfNotFound(String toyota) {
+        createAutoBrandIfNotFound("TOYOTA");
+
+    }
 }

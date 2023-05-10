@@ -37,7 +37,7 @@ public class NewCarRegistrationServlet extends HttpServlet {
         final Integer yearAuto = Integer.parseInt(req.getParameter("yearAuto"));
         final Double priceAuto = Double.parseDouble(req.getParameter("priceAuto"));
 
-        Auto auto = new Auto(autoModel, colourAuto, transmissionAuto, yearAuto, priceAuto);
+        Auto auto = new Auto(autoBrand, autoModel, colourAuto, transmissionAuto, yearAuto, priceAuto);
         try {
             AutoService.addAutoToList(auto);
         } catch (SQLException e) {

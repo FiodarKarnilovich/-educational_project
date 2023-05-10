@@ -1,8 +1,11 @@
 package by.karnilovich.service.auto;
 
+import by.karnilovich.db.dao.AutoDao;
 import by.karnilovich.entity.auto.Auto;
 import by.karnilovich.entity.order.Order;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,25 +16,40 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IAutoServiceTest {
 
-    private IAutoService autoService = new IAutoService() {
+    private static AutoDao autoDao = Mockito.mock(AutoDao.class);
 
-        @Override
-        public List<Auto> availableCars(LocalDate start, LocalDate end) {
-            List<Auto> result = new ArrayList<Auto>();
-            return result.stream()
-                    .filter(auto -> checkAvailability(auto, start, end))
-                    .collect(Collectors.toList());
-        }
+    private IAutoService autoService = new AutoServiceImpl(autoDao);
 
-        @Override
-        public boolean checkAvailability(Auto auto, LocalDate start, LocalDate end) {
-            return true;
-        }
-    };
+    @BeforeAll
+    public static void before() throws Exception {
+        Order order = new Order();
+        order.setStartDate(LocalDate.of(2023, 5, 3));
+        order.setEndDate(LocalDate.of(2023, 5, 6));
+        Auto auto1 = new Auto();
+        auto1.addOrder(order);
 
+        order = new Order();
+        order.setStartDate(LocalDate.of(2023, 5, 6));
+        order.setEndDate(LocalDate.of(2023, 5, 12));
+        Auto auto2 = new Auto();
+        auto2.addOrder(order);
 
+        Auto auto3 = new Auto();
+        order = new Order();
+        order.setStartDate(LocalDate.of(2023, 5, 2));
+        order.setEndDate(LocalDate.of(2023, 5, 3));
+        auto3.addOrder(order);
+
+        List<Auto> autos = List.of(auto1, auto2, auto3);
+        Mockito.when(autoDao.getAll()).thenReturn(autos);
+    }
     @Test
-    void availableCars() {
+    void availableCars() throws Exception {
+        List<Auto> autos = autoService.availableCars(
+                LocalDate.of(2023, 5, 5),
+                LocalDate.of(2023, 5, 8));
+
+        assertEquals(1, autos.size());
     }
 
     @Test

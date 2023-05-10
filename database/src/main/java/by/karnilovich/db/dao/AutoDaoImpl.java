@@ -2,10 +2,12 @@ package by.karnilovich.db.dao;
 
 import by.karnilovich.db.connection.ConnectionManager;
 import by.karnilovich.entity.auto.Auto;
+import by.karnilovich.entity.auto.Brand;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AutoDaoImpl implements AutoDao {
 
@@ -32,9 +34,9 @@ public class AutoDaoImpl implements AutoDao {
 
     public static final String INSERT_INTO =
             """
-                    INSERT INTO auto (modelName_id, colourAuto, transmissionAuto, yearAuto, priceAuto)
-//                    VALUES (?,?,?,?,?);
-                    """;
+                                        INSERT INTO auto (modelName_id, colourAuto, transmissionAuto, yearAuto, priceAuto)
+                    //                    VALUES (?,?,?,?,?);
+                                        """;
     public static final String DELETE_FROM_AUTO_BY_ID = """
             DELETE FROM auto WHERE id =?;
             """;
@@ -60,7 +62,8 @@ public class AutoDaoImpl implements AutoDao {
     }
 
     @Override
-    public void createAutoBrandIfNotFound(String autoBrand) throws SQLException {
+    public Optional<String> findAutoBrandByName(String autoBrand) throws SQLException {
+
         try (Connection connection = ConnectionManager.getConnection();
              Statement statement = connection.createStatement()) {
             List<String> autoBrands = new ArrayList<>();
@@ -69,55 +72,106 @@ public class AutoDaoImpl implements AutoDao {
                     String brandName = resultSet.getString("brandName");
                     autoBrands.add(brandName);
                 }
-                 String searchBrand = autoBrands.stream()
-                        .filter(p -> p.equalsIgnoreCase(autoBrand))
-                        .findFirst().orElse(null);
+            }
+            return autoBrands.stream()
+                    .filter(p -> p.equalsIgnoreCase(autoBrand))
+                    .findFirst();
+        }
+    }
 
-                if (searchBrand == null) {
-                    statement.executeQuery("INSERT INTO autoBrand (brandName) VALUES ('" + autoBrand +"')");
+    public Optional<Brand> getBrandByName(String autoBrand) throws SQLException {
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM autoBrand WHERE brandName = ?")) {
+            preparedStatement.setString(1, autoBrand);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    Brand brand = new Brand();
+                    brand.setBrandName(resultSet.getString("brandName"));
+                    brand.setId(resultSet.getInt("id"));
+                    return Optional.of(brand);
                 }
             }
-
         }
-
+        return Optional.empty();
     }
 
     @Override
-    public List<Auto> getAll() throws SQLException {
+    public Optional<Brand> getBrandByNameOrCreateIfNotExist(String autoBrand) throws SQLException {
+        Optional<Brand> brandByName = getBrandByName(autoBrand);
+        if (brandByName.isEmpty()) {
+            try (Connection connection = ConnectionManager.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO autoBrand (brandName) VALUES ('?')")) {
+                preparedStatement.setString(1, autoBrand);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                }
+            }
+            brandByName = getBrandByName(autoBrand);
+        }
 
+        return brandByName;
+    }
+
+    @Override
+    public void createAutoBrandIfNotFound(String autoBrand) throws SQLException {
         try (Connection connection = ConnectionManager.getConnection();
              Statement statement = connection.createStatement()) {
-            List<Auto> autos = new ArrayList<>();
-            try (ResultSet resultSet = statement.executeQuery(GET_ALL_FROM_AUTO)) {
-                while (resultSet.next()) {
-                    Auto auto = toAuto(resultSet);
-                    autos.add(auto);
+            try {
+                final Optional<String> autoBrandByName = findAutoBrandByName(autoBrand);
+                if (autoBrandByName.isPresent()) {
+                    statement.executeQuery("");
                 }
+
+                getBrandByNameOrCreateIfNotExist(autoBrand)
+                        .orElseGet(() -> {
+                            try {
+                                statement.executeQuery("INSERT INTO autoBrand (brandName) VALUES ('" + autoBrand + "')");
+                                return getBrandByNameOrCreateIfNotExist(autoBrand).get();
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                                return null;
+                            }
+                        });
+            } catch (SQLException e) {}
+
+        }
+    }
+
+        @Override
+        public List<Auto> getAll () throws SQLException {
+
+            try (Connection connection = ConnectionManager.getConnection();
+                 Statement statement = connection.createStatement()) {
+                List<Auto> autos = new ArrayList<>();
+                try (ResultSet resultSet = statement.executeQuery(GET_ALL_FROM_AUTO)) {
+                    while (resultSet.next()) {
+                        Auto auto = toAuto(resultSet);
+                        autos.add(auto);
+                    }
+                }
+                return autos;
             }
-            return autos;
         }
-    }
 
-    @Override
-    public Auto save(Auto auto) throws SQLException {
-        try (Connection connection = ConnectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO)) {
-            preparedStatement.setString(1, auto.getAutoModel());
-            preparedStatement.setString(2, auto.getColourAuto());
-            preparedStatement.setString(3, auto.getTransmissionAuto());
-            preparedStatement.setInt(4, auto.getYearAuto());
-            preparedStatement.setDouble(5, auto.getPriceAuto());
+        @Override
+        public Auto save (Auto auto) throws SQLException {
+            try (Connection connection = ConnectionManager.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO)) {
+                preparedStatement.setString(1, auto.getAutoModel());
+                preparedStatement.setString(2, auto.getColourAuto());
+                preparedStatement.setString(3, auto.getTransmissionAuto());
+                preparedStatement.setInt(4, auto.getYearAuto());
+                preparedStatement.setDouble(5, auto.getPriceAuto());
 
-            preparedStatement.executeUpdate();
+                preparedStatement.executeUpdate();
+            }
+            return getAll().stream()
+                    .filter(p -> p.getId() == auto.getId())
+                    .findFirst()
+                    .orElse(null);
         }
-        return getAll().stream()
-                .filter(p -> p.getId() == auto.getId())
-                .findFirst()
-                .orElse(null);
-    }
 
-    @Override
-    public void update(Auto auto) throws SQLException {
+        @Override
+        public void update (Auto auto) throws SQLException {
             try (Connection connection = ConnectionManager.getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_AUTO_BY_ID)) {
 
@@ -128,26 +182,26 @@ public class AutoDaoImpl implements AutoDao {
             }
 
         }
-    @Override
-    public void delete(Integer id) throws SQLException {
-        try (Connection connection = ConnectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_AUTO_BY_ID)) {
+        @Override
+        public void delete (Integer id) throws SQLException {
+            try (Connection connection = ConnectionManager.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_AUTO_BY_ID)) {
 
-            preparedStatement.setInt(1, id);
-            preparedStatement.execute();
+                preparedStatement.setInt(1, id);
+                preparedStatement.execute();
+            }
+        }
+
+        private Auto toAuto (ResultSet resultSet) throws SQLException {
+            Auto auto = new Auto();
+            auto.setId(resultSet.getInt("id"));
+            auto.setAutoBrand(resultSet.getString("brandName"));
+            auto.setAutoModel(resultSet.getString("modelName"));
+            auto.setColourAuto(resultSet.getString("colourAuto"));
+            auto.setTransmissionAuto(resultSet.getString("transmissionAuto"));
+            auto.setYearAuto(resultSet.getInt("yearAuto"));
+            auto.setPriceAuto(resultSet.getDouble("priceAuto"));
+
+            return auto;
         }
     }
-
-    private Auto toAuto(ResultSet resultSet) throws SQLException {
-        Auto auto = new Auto();
-        auto.setId(resultSet.getInt("id"));
-        auto.setAutoBrand(resultSet.getString("brandName"));
-        auto.setAutoModel(resultSet.getString("modelName"));
-        auto.setColourAuto(resultSet.getString("colourAuto"));
-        auto.setTransmissionAuto(resultSet.getString("transmissionAuto"));
-        auto.setYearAuto(resultSet.getInt("yearAuto"));
-        auto.setPriceAuto(resultSet.getDouble("priceAuto"));
-
-        return auto;
-    }
-}
