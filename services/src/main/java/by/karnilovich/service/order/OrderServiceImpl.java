@@ -1,7 +1,5 @@
 package by.karnilovich.service.order;
 
-import by.karnilovich.db.dao.AutoDao;
-import by.karnilovich.db.dao.AutoDaoImpl;
 import by.karnilovich.db.dao.OrderDao;
 import by.karnilovich.db.dao.OrderDaoImpl;
 import by.karnilovich.entity.auto.Auto;
@@ -15,7 +13,6 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService {
 
     private static OrderDao orderDao = new OrderDaoImpl();
-    private static List<Order> orderList = new ArrayList<>();
 
     @Override
     public List<Order> getAllOrder() throws SQLException {
@@ -28,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAllOrderByAutoId(int id) throws SQLException {
+    public List<Order> getAllOrdersByAutoId(int id) throws SQLException {
         try {
             return
                     orderDao.getAll().stream()

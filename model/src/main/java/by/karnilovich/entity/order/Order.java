@@ -10,6 +10,7 @@ public class Order {
     private int auto_id;
     private String autoBrand;
     private String autoModel;
+    private Auto auto;
     private LocalDate startDate;
     private LocalDate finishDate;
 

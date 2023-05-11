@@ -12,5 +12,5 @@ public interface OrderService {
 
     public Auto getAutoFromOrderById(int id) throws SQLException;
 
-    public List<Order> getAllOrderByAutoId(int id) throws SQLException;
+    public List<Order> getAllOrdersByAutoId(int id) throws SQLException;
 }

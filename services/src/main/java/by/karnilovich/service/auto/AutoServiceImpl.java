@@ -9,14 +9,13 @@ import by.karnilovich.service.order.OrderServiceImpl;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class AutoServiceImpl implements IAutoService {
 
     private AutoDao autoDao = new AutoDaoImpl();
+    private OrderService orderService = new OrderServiceImpl();
 
     //    1
     public AutoServiceImpl() {
@@ -57,42 +56,37 @@ public class AutoServiceImpl implements IAutoService {
     @Override
     public boolean checkAvailability(Auto auto, LocalDate start, LocalDate end) throws SQLException {
 
-        List<Order> listOrderByAutoId = new ArrayList();
-        int check = 0;
-        if (listOrderByAutoId == null) {
-            return true;
-        } else {
+        List<Order> listOrderByAutoId = auto.getOrders();
+                //orderService.getAllOrdersByAutoId(auto.getId());
+
+        if (!listOrderByAutoId.isEmpty()) {
 
             for (Order order : listOrderByAutoId) {
 
                 // проверка даты, когда обе даты слева от брони или справа от брони
-                if ((start.isBefore(order.getStartDate()) && (end.isBefore(order.getFinishDate()) || end.isEqual(order.getFinishDate())))
-                        || ((start.isAfter(order.getStartDate()) || start.isEqual(order.getStartDate())) && end.isAfter(order.getFinishDate()))) {
-                    check = 0;
+                if (!((start.isBefore(order.getStartDate()) && (end.isBefore(order.getStartDate()) || end.isEqual(order.getStartDate())))
+                        || ((start.isAfter(order.getFinishDate()) || start.isEqual(order.getFinishDate())) && end.isAfter(order.getFinishDate())))) {
+                    return false;
                 }
-                // проверка даты, когда дата старта внутри ордера
-                else if ((start.isAfter(order.getStartDate()) || start.isEqual(order.getStartDate())) && start.isBefore(order.getFinishDate()) && end.isAfter(order.getFinishDate())) {
-                    check++;
-                }
-                // проверка даты, когда дата финиша внутри ордера
-                else if (start.isBefore(order.getStartDate()) && (end.isAfter(order.getStartDate()) && (end.isBefore(order.getFinishDate()) || end.isEqual(order.getFinishDate())))) {
-                    check++;
-                }
-                // проверка даты, когда заказ внутри ордера
-                else if ((start.isAfter(order.getStartDate()) || start.isEqual(order.getStartDate())) && (end.isBefore(order.getFinishDate()) || end.isEqual(order.getFinishDate()))) {
-                    check++;
-                }
-                // проверка даты, когда ордер внутри заказа
-                else if (start.isBefore(order.getStartDate()) && end.isAfter(order.getFinishDate())) {
-                    check++;
-                }
+//                // проверка даты, когда дата старта внутри ордера
+//                else if ((start.isAfter(order.getStartDate()) || start.isEqual(order.getStartDate())) && start.isBefore(order.getFinishDate()) && end.isAfter(order.getFinishDate())) {
+//                    check++;
+//                }
+//                // проверка даты, когда дата финиша внутри ордера
+//                else if (start.isBefore(order.getStartDate()) && (end.isAfter(order.getStartDate()) && (end.isBefore(order.getFinishDate()) || end.isEqual(order.getFinishDate())))) {
+//                    check++;
+//                }
+//                // проверка даты, когда заказ внутри ордера
+//                else if ((start.isAfter(order.getStartDate()) || start.isEqual(order.getStartDate())) && (end.isBefore(order.getFinishDate()) || end.isEqual(order.getFinishDate()))) {
+//                    check++;
+//                }
+//                // проверка даты, когда ордер внутри заказа
+//                else if (start.isBefore(order.getStartDate()) && end.isAfter(order.getFinishDate())) {
+//                    check++;
+//                }
             }
 
-            if (check == 0) {
-                return true;
-            } else {
-                return false;
-            }
         }
+        return true;
     }
 }

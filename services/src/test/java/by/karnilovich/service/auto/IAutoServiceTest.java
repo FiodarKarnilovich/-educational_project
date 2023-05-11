@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -41,6 +42,7 @@ class IAutoServiceTest {
         List<Auto> autos = List.of(auto1, auto2, auto3);
         Mockito.when(autoDao.getAll()).thenReturn(autos);
     }
+
     @Test
     void availableCars() throws Exception {
         List<Auto> autos = autoService.availableCars(
@@ -51,7 +53,7 @@ class IAutoServiceTest {
     }
 
     @Test
-    void checkAvailability() {
+    void checkAvailabilityWhenStartDateInAnotherOrder() throws SQLException {
         // case when startDate in another order
         Order order = new Order();
         order.setStartDate(LocalDate.of(2023, 5, 3));
@@ -59,52 +61,66 @@ class IAutoServiceTest {
         Auto auto = new Auto();
         auto.addOrder(order);
         assertFalse(autoService.checkAvailability(auto, LocalDate.of(2023, 5, 5), LocalDate.of(2023, 5, 8)), "case when startDate in another order");
+    }
 
+    @Test
+    void checkAvailabilityWhenEndDateInAnotherOrder() throws SQLException {
         // case when endDate in another order
-        order = new Order();
+        Order order = new Order();
         order.setStartDate(LocalDate.of(2023, 5, 6));
         order.setFinishDate(LocalDate.of(2023, 5, 12));
-        auto = new Auto();
+        Auto auto = new Auto();
         auto.addOrder(order);
         assertFalse(autoService.checkAvailability(auto, LocalDate.of(2023, 5, 5), LocalDate.of(2023, 5, 8)), "case when endDate in another order");
+    }
 
+    @Test
+    void checkAvailabilityWhenBothStartDateAndEndDateInAnotherOrder() throws SQLException {
         // case when both startDate and endDate in another order
-        order = new Order();
+        Order order = new Order();
         order.setStartDate(LocalDate.of(2023, 5, 6));
         order.setFinishDate(LocalDate.of(2023, 5, 7));
-        auto = new Auto();
+        Auto auto = new Auto();
         auto.addOrder(order);
         assertFalse(autoService.checkAvailability(auto, LocalDate.of(2023, 5, 5), LocalDate.of(2023, 5, 8)), "case when both startDate and endDate in another order");
+    }
 
+    @Test
+    void checkAvailabilityWhenNewOrderInsideAnotherOrder() throws SQLException {
         // case when new order inside another order
-        order = new Order();
+        Order order = new Order();
         order.setStartDate(LocalDate.of(2023, 5, 6));
         order.setFinishDate(LocalDate.of(2023, 5, 7));
-        auto = new Auto();
+        Auto auto = new Auto();
         auto.addOrder(order);
         assertFalse(autoService.checkAvailability(auto, LocalDate.of(2023, 5, 5), LocalDate.of(2023, 5, 8)), "case when new order inside another order");
-
-        // case ok 1
-        order = new Order();
-        order.setStartDate(LocalDate.of(2023, 5, 2));
-        order.setFinishDate(LocalDate.of(2023, 5, 3));
-        auto = new Auto();
-        auto.addOrder(order);
-        assertTrue(autoService.checkAvailability(auto, LocalDate.of(2023, 5, 5), LocalDate.of(2023, 5, 8)), "ok");
-
-        // case ok 2
-        order = new Order();
-        order.setStartDate(LocalDate.of(2023, 5, 11));
-        order.setFinishDate(LocalDate.of(2023, 5, 15));
-        auto = new Auto();
-        auto.addOrder(order);
-        assertTrue(autoService.checkAvailability(auto, LocalDate.of(2023, 5, 5), LocalDate.of(2023, 5, 8)), "ok 2");
-
 
     }
 
     @Test
-    void checkAvailabilityWhenLeftBorder() {
+    void checkAvailabilityWhenOk1() throws SQLException {
+        // case ok 1
+        Order order = new Order();
+        order.setStartDate(LocalDate.of(2023, 5, 2));
+        order.setFinishDate(LocalDate.of(2023, 5, 3));
+        Auto auto = new Auto();
+        auto.addOrder(order);
+        assertTrue(autoService.checkAvailability(auto, LocalDate.of(2023, 5, 5), LocalDate.of(2023, 5, 8)), "ok");
+    }
+
+    @Test
+    void checkAvailabilityWhenOk2() throws SQLException {
+        // case ok 2
+        Order order = new Order();
+        order.setStartDate(LocalDate.of(2023, 5, 11));
+        order.setFinishDate(LocalDate.of(2023, 5, 15));
+        Auto auto = new Auto();
+        auto.addOrder(order);
+        assertTrue(autoService.checkAvailability(auto, LocalDate.of(2023, 5, 5), LocalDate.of(2023, 5, 8)), "ok 2");
+    }
+
+    @Test
+    void checkAvailabilityWhenLeftBorder() throws SQLException {
         Order order = new Order();
         order.setStartDate(LocalDate.of(2023, 5, 2));
         order.setFinishDate(LocalDate.of(2023, 5, 5));
@@ -114,7 +130,7 @@ class IAutoServiceTest {
     }
 
     @Test
-    void checkAvailabilityMultipleOrdersFalse() {
+    void checkAvailabilityMultipleOrdersFalse() throws SQLException {
         // case when startDate in another order
         Auto auto = new Auto();
         Order order = new Order();
